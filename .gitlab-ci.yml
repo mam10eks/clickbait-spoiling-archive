@@ -12,6 +12,7 @@ check-runner:
   script:
     - ./tira-test-runner-is-trustworthy.sh
     - ./tira-specify-task-to-run.sh >> task.env
+    - cat task.env
   tags:
     - no-internet
 

@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: k8s-no-internet-network-policy
+  namespace: kibi9872
+spec:
+  podSelector:
+    matchLabels:
+      role: no-internet
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/32
+        # TODO: How block ip v6?
+

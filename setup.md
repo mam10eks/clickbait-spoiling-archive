@@ -7,6 +7,7 @@ Create service account for TIRA, used by the runner to create pods.
 
 ```
 kubectl -n kibi9872 apply -f k8s-tira-service-account.yml
+kubectl -n kibi9872 apply -f k8s-no-internet-network-policy.yml
 ```
 
 To start from scratch, run:

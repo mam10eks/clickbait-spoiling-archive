@@ -1,16 +1,25 @@
 stages:
+  - check-runner
   - evaluate-run
   - copy-evaluation-to-tira
 
+check-runner:
+  stage: check-runner
+  image: curlimages/curl
+  script:
+    - echo "Check that the runner is trustworthy."
+    - ./tira-test-runner-is-trustworthy.sh
+  tags:
+    - no-internet
+    
 evaluate-run:
   stage: evaluate-run
   script:
-    - echo "This job evaluates the run."
-    - ./tira-test-runner-is-trustworthy.sh
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/
     - ls /mnt/ceph/tira/data/datasets/test-datasets-truth/
   tags:
+    - no-internet
     - read-tira-data-datasets-truth
     - read-tira-data-runs
 

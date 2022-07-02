@@ -11,11 +11,12 @@ rbac:
 runners:
   name: gitlab-runner-tira-evaluators
   Description: Evaluate user runs on proprietary data while ensuring that nothing can be leaked.
-  tags: read-tira-data-datasets-truth,read-tira-data-runs
+  tags: no-internet,read-tira-data-datasets-truth,read-tira-data-runs
   config: |
     [[runners]]
       [runners.kubernetes]
         image = "ubuntu:16.04"
+        pod_labels = "role: no-internet"
         [[runners.kubernetes.volumes.host_path]]
           name = "read-tira-data-runs"
           mount_path = "/mnt/ceph/tira/data/runs/"

@@ -6,6 +6,7 @@ evaluate-run:
   stage: evaluate-run
   script:
     - echo "This job evaluates the run."
+    - curl 'google.de'
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/
     - ls /mnt/ceph/tira/data/datasets/test-datasets-truth/

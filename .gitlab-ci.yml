@@ -6,21 +6,22 @@ stages:
 check-runner:
   stage: check-runner
   image: curlimages/curl
+  artifacts:
+    reports:
+      dotenv: task.env
   script:
-    - echo "Check that the runner is trustworthy."
     - ./tira-test-runner-is-trustworthy.sh
+    - ./tira-specify-task-to-run.sh >> task.env
   tags:
     - no-internet
-    
+
 evaluate-run:
   stage: evaluate-run
+  dependencies: 
+    - check-runner
   artifacts:
     untracked: true
   image: "${IMAGE_TO_EXECUTE}"
-  variables:
-    INPUT_RUN: "dummy-input-run"
-    OUTPUT_DIR: "dummy-output-dir"
-    IMAGE_TO_EXECUTE: "ubuntu:16.02sa4"
   script:
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/

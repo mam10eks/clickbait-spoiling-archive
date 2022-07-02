@@ -23,11 +23,12 @@ evaluate-run:
     untracked: true
     reports:
       dotenv: task.env
-  image: "${IMAGE_TO_EXECUTE}"
+  image: "${TIRA_IMAGE_TO_EXECUTE}"
   script:
-    - mkdir -p ${OUTPUT_DIR}
-    - echo "${COMMAND_TO_EXECUTE}"
-    - eval "${COMMAND_TO_EXECUTE}"
+    - mkdir -p ${TIRA_OUTPUT_DIR}
+    - echo "${TIRA_COMMAND_TO_EXECUTE}"
+    - eval "${TIRA_COMMAND_TO_EXECUTE}"
+    - env|grep 'TIRA' >> task.env
   tags:
     - no-internet
     - read-tira-data-datasets-truth
@@ -40,7 +41,7 @@ copy-evaluation-to-tira:
     - ls -l .
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/
-    - echo "${COMMAND_TO_EXECUTE}"
+    - echo "${TIRA_COMMAND_TO_EXECUTE}"
   dependencies: 
     - evaluate-run
   tags:

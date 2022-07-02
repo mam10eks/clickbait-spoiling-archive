@@ -1,7 +1,22 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: k8s-no-internet-network-policy
+  name: k8s-no-internet-network-policy-deny-all
+  namespace: kibi9872
+spec:
+  podSelector:
+    matchLabels:
+      role: no-internet
+  policyTypes:
+    - Egress
+  # List of egress rules is an empty array: This causes all traffic (including DNS resolution) to be dropped.
+  # See: https://github.com/ahmetb/kubernetes-network-policy-recipes/blob/master/12-deny-all-non-whitelisted-traffic-from-the-namespace.md
+  egress: []
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: k8s-no-internet-network-policy-allow-webis
   namespace: kibi9872
 spec:
   podSelector:
@@ -12,6 +27,10 @@ spec:
   egress:
     - to:
         - ipBlock:
-            cidr: 0.0.0.0/32
-        # TODO: How block ip v6?
+            # Allow access to betaweb
+            cidr: 141.54.0.0/16
+            # Allow access to the kubernetes pod (for DNS). cluster_cidr is by default 10.42.0.0/16. See https://rancher.com/docs/rke/latest/en/config-options/services/
+    - to:
+        - ipBlock:
+            cidr: 10.42.0.0/16
 

@@ -1,14 +1,22 @@
 stages:
+  - prepare
   - check-runner
   - evaluate-run
   - copy-evaluation-to-tira
+
+prepare:
+  stage: prepare
+  image: curlimages/curl
+  script:
+    - echo "Check that the runner is trustworthy."
+  tags:
+    - write-tira-data-runs
 
 check-runner:
   stage: check-runner
   image: curlimages/curl
   script:
     - echo "Check that the runner is trustworthy."
-    - sleep 10m
     - ./tira-test-runner-is-trustworthy.sh
   tags:
     - no-internet

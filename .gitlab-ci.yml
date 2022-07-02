@@ -9,6 +9,7 @@ prepare:
   image: curlimages/curl
   script:
     - echo "Check that the runner is trustworthy."
+    - git status
   tags:
     - write-tira-data-runs
 

@@ -16,7 +16,7 @@ runners:
     [[runners]]
       [runners.kubernetes]
         image = "ubuntu:16.04"
-        [[runners.kubernetes.pod_labels]]
+        [runners.kubernetes.pod_labels]
           role = "no-internet"
         [[runners.kubernetes.volumes.host_path]]
           name = "read-tira-data-datasets-test-datasets"

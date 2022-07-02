@@ -1,6 +1,6 @@
 #!/bin/sh
 
-URLS=( google.com github.com gitlab.com webis.de )
+URLS="google.com github.com gitlab.com webis.de"
 
 which curl  2> /dev/null 1> /dev/null
 
@@ -9,9 +9,9 @@ if [ "$?" != "0" ]; then
     exit 1
 fi
 
-for URL in "${URLS[@]}"
+for URL in ${URLS}
 do
-    CURL_OUTPUT=$(curl "${URL}" 2>&1|grep "http")
+    CURL_OUTPUT=$(curl -m 5 -i "${URL}" 2>&1|grep -i "http")
    
     if [ "$?" == "0" ]; then
         echo -e " [\033[0;31mx\033[0m] The runner has access to the internet. I abort the run."

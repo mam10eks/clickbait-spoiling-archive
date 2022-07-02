@@ -20,7 +20,7 @@ evaluate-run:
   variables:
     INPUT_RUN: "dummy-input-run"
     OUTPUT_DIR: "dummy-output-dir"
-    IMAGE_TO_EXECUTE: "ubuntu:16.04"
+    IMAGE_TO_EXECUTE: "ubuntu:16.02sa4"
   script:
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/

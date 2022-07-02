@@ -1,0 +1,12 @@
+# our gitlab
+gitlabUrl: https://git.webis.de
+
+# I got this registration token from the "Settings" -> "CI/CD Settings" -> "Runners" -> "Specific runners" section
+runnerRegistrationToken: GR1348941n1xMSpZPmyp3voJLGpAU
+
+runners:
+  name: gitlab-runner-tira-evaluators
+  Description: Evaluate user runs on proprietary data while ensuring that nothing can be leaked.
+  tags:
+    - read-tira-data-datasets-truth
+    - read-tira-data-runs

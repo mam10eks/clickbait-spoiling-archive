@@ -29,3 +29,10 @@ helm install --namespace kibi9872 gitlab-runner-tira-copy -f k8s-gitlab-runner-t
 After this command, the runner should be available in  "Settings" -> "CI/CD Settings" -> "Runners" -> "Specific runners" section.
 
 
+Create directory to execute, e.g., `scai-qrecc22-dataset-20220607-training/hal9000-default/2022-06-28-21-03-37/job-to-execute.txt`:
+
+```
+TIRA_IMAGE_TO_EXECUTE=ubuntu:16.04
+TIRA_COMMAND_TO_EXECUTE=bash -c 'ls /mnt/ceph/tira/data/; ls /mnt/ceph/tira/data/runs/; ls /mnt/ceph/tira/data/datasets/test-datasets-truth/; echo \"\${TIRA_INPUT_RUN}\"; echo \"\${TIRA_OUTPUT_DIR}\"; touch dummy-result-01.jsonl; touch \${TIRA_OUTPUT_DIR}/dummy-result-02.jsonl'
+```
+

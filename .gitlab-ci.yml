@@ -14,6 +14,8 @@ check-runner:
     
 evaluate-run:
   stage: evaluate-run
+  artifacts:
+    untracked: true
   script:
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/

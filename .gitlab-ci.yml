@@ -24,6 +24,7 @@ evaluate-run:
   image: "${IMAGE_TO_EXECUTE}"
   script:
     - mkdir -p ${OUTPUT_DIR}
+    - echo "${COMMAND_TO_EXECUTE}"
     - ${COMMAND_TO_EXECUTE}
   tags:
     - no-internet

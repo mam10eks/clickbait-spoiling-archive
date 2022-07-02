@@ -23,12 +23,8 @@ evaluate-run:
     untracked: true
   image: "${IMAGE_TO_EXECUTE}"
   script:
-    - ls /mnt/ceph/tira/data/
-    - ls /mnt/ceph/tira/data/runs/
-    - ls /mnt/ceph/tira/data/datasets/test-datasets-truth/
-    - echo "${INPUT_RUN}"
-    - echo "${OUTPUT_DIR}"
-    - touch evaluation-result.jsonl
+    - mkdir -p ${OUTPUT_DIR}
+    - ${COMMAND_TO_EXECUTE}
   tags:
     - no-internet
     - read-tira-data-datasets-truth

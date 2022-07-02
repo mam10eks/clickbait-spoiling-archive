@@ -2,7 +2,8 @@
 gitlabUrl: https://git.webis.de
 
 # I got this registration token from the "Settings" -> "CI/CD Settings" -> "Runners" -> "Specific runners" section
-runnerRegistrationToken: GR1348941n1xMSpZPmyp3voJLGpAU
+# Group Runner: Group -> Settings -> ...
+runnerRegistrationToken: GR1348941u_q9j7QxP8diNgzxu7-j
 
 # The runner uses this service account to create pods.
 rbac:

@@ -1,0 +1,18 @@
+stages:
+  - evaluate-run
+  - copy-evaluation-to-tira
+
+evaluate-run:
+  stage: evaluate-run
+  script:
+    - echo "This job evaluates the run."
+  tags:
+    - read-tira-data-datasets-truth
+    - read-tira-data-runs
+
+copy-evaluation-to-tira:
+  stage: copy-evaluation-to-tira
+  script:
+    - echo "This job moves the evaluation result to the TIRA directory. ToDo here, we need write-tira-data-runs"
+
+

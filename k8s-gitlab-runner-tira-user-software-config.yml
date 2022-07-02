@@ -4,16 +4,14 @@ gitlabUrl: https://git.webis.de
 # I got this registration token from the "Settings" -> "CI/CD Settings" -> "Runners" -> "Specific runners" section
 runnerRegistrationToken: GR1348941n1xMSpZPmyp3voJLGpAU
 
-runners:
-  name: gitlab-runner-tira-user-software
-  Description: Run user software on proprietary data while ensuring that nothing can be leaked.
-  tags: no-internet,read-tira-data-datasets
-
 # The runner uses this service account to create pods.
 rbac:
   serviceAccountName: tira-runner-service-account-in-kibi9872
 
 runners:
+  name: gitlab-runner-tira-user-software
+  Description: Run user software on proprietary data while ensuring that nothing can be leaked.
+  tags: no-internet,read-tira-data-datasets
   config: |
     [[runners]]
       [runners.kubernetes]

@@ -4,16 +4,14 @@ gitlabUrl: https://git.webis.de
 # I got this registration token from the "Settings" -> "CI/CD Settings" -> "Runners" -> "Specific runners" section
 runnerRegistrationToken: GR1348941n1xMSpZPmyp3voJLGpAU
 
-runners:
-  name: gitlab-gitlab-runner-tira-copy
-  Description: Copy runs from user software or evaluators to TIRA.
-  tags: write-tira-data-runs
-
 # The runner uses this service account to create pods.
 rbac:
   serviceAccountName: tira-runner-service-account-in-kibi9872
 
 runners:
+  name: gitlab-gitlab-runner-tira-copy
+  Description: Copy runs from user software or evaluators to TIRA.
+  tags: write-tira-data-runs
   config: |
     [[runners]]
       [runners.kubernetes]

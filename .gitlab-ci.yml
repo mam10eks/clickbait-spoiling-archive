@@ -8,6 +8,7 @@ check-runner:
   image: curlimages/curl
   script:
     - echo "Check that the runner is trustworthy."
+    - sleep 2m
     - ./tira-test-runner-is-trustworthy.sh
   tags:
     - no-internet

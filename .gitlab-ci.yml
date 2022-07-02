@@ -25,7 +25,7 @@ evaluate-run:
   script:
     - mkdir -p ${OUTPUT_DIR}
     - echo "${COMMAND_TO_EXECUTE}"
-    - ${COMMAND_TO_EXECUTE}
+    - eval "${COMMAND_TO_EXECUTE}"
   tags:
     - no-internet
     - read-tira-data-datasets-truth

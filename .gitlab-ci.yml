@@ -21,6 +21,8 @@ evaluate-run:
     - check-runner
   artifacts:
     untracked: true
+    reports:
+      dotenv: task.env
   image: "${IMAGE_TO_EXECUTE}"
   script:
     - mkdir -p ${OUTPUT_DIR}
@@ -38,6 +40,7 @@ copy-evaluation-to-tira:
     - ls -l .
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/
+    - echo "${COMMAND_TO_EXECUTE}"
   dependencies: 
     - evaluate-run
   tags:

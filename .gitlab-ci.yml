@@ -18,6 +18,7 @@ evaluate-run:
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/
     - ls /mnt/ceph/tira/data/datasets/test-datasets-truth/
+    - touch evaluation-result.jsonl
   tags:
     - no-internet
     - read-tira-data-datasets-truth
@@ -27,8 +28,11 @@ copy-evaluation-to-tira:
   stage: copy-evaluation-to-tira
   script:
     - echo "This job moves the evaluation result to the TIRA directory. ToDo here, we need write-tira-data-runs"
+    - ls -l .
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/
+  dependencies: 
+    - evaluate-run
   tags:
     - write-tira-data-runs
 

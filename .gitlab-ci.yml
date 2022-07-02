@@ -35,7 +35,7 @@ evaluate-run:
     - read-tira-data-datasets-truth
     - read-tira-data-runs
   rules:
-    - if: $TIRA_IMAGE_TO_EXECUTE
+    - if: $TIRA_IMAGE_TO_EXECUTE != ""
 
 copy-evaluation-to-tira:
   stage: copy-evaluation-to-tira
@@ -50,5 +50,5 @@ copy-evaluation-to-tira:
   tags:
     - write-tira-data-runs
   rules:
-    - if: $TIRA_OUTPUT_DIR
+    - if: $TIRA_OUTPUT_DIR != ""
 

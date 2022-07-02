@@ -16,10 +16,15 @@ evaluate-run:
   stage: evaluate-run
   artifacts:
     untracked: true
+  variables:
+    INPUT_RUN: "dummy-input-run"
+    OUTPUT_DIR: "dummy-output-dir"
   script:
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/
     - ls /mnt/ceph/tira/data/datasets/test-datasets-truth/
+    - echo "${INPUT_RUN}"
+    - echo "${OUTPUT_DIR}"
     - touch evaluation-result.jsonl
   tags:
     - no-internet

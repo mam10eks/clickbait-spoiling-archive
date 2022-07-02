@@ -15,8 +15,10 @@ rbac:
 
 runners:
   config: |
-    [[runners.kubernetes.volumes.host_path]]
-      name = "read-tira-data-datasets-test-datasets"
-      mount_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/runs/"
-      read_only = false
-      host_path = "/mnt/ceph/tira/data/runs/"
+    [[runners]]
+      [runners.kubernetes]
+        [[runners.kubernetes.volumes.host_path]]
+          name = "read-tira-data-datasets-test-datasets"
+          mount_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/runs/"
+          read_only = false
+          host_path = "/mnt/ceph/tira/data/runs/"

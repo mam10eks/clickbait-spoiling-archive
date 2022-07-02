@@ -6,6 +6,9 @@ evaluate-run:
   stage: evaluate-run
   script:
     - echo "This job evaluates the run."
+    - ls /mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/
+    - ls /mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/runs/
+    - ls /mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/datasets/test-datasets-truth/
   tags:
     - read-tira-data-datasets-truth
     - read-tira-data-runs
@@ -16,5 +19,6 @@ copy-evaluation-to-tira:
     - echo "This job moves the evaluation result to the TIRA directory. ToDo here, we need write-tira-data-runs"
   tags:
     - write-tira-data-runs
-
+    - ls /mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/
+    - ls /mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/runs/
 

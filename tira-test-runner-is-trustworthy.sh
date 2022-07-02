@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/bash
 
 URLS=( google.com github.com gitlab.com webis.de )
 

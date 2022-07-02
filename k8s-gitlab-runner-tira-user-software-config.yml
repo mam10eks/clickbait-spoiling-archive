@@ -15,13 +15,14 @@ runners:
   config: |
     [[runners]]
       [runners.kubernetes]
+        image = "ubuntu:16.04"
         [[runners.kubernetes.volumes.host_path]]
           name = "read-tira-data-datasets-test-datasets"
-          mount_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/datasets/test-datasets/"
+          mount_path = "/mnt/ceph/tira/data/datasets/test-datasets/"
           read_only = true
-          host_path = "/mnt/ceph/tira/data/datasets/test-datasets/"
+          host_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/datasets/test-datasets/"
         [[runners.kubernetes.volumes.host_path]]
           name = "read-tira-data-datasets-training-datasets"
-          mount_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/datasets/training-datasets/"
+          mount_path = "/mnt/ceph/tira/data/datasets/training-datasets/"
           read_only = true
-          host_path = "/mnt/ceph/tira/data/datasets/training-datasets/"
+          host_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/datasets/training-datasets/"

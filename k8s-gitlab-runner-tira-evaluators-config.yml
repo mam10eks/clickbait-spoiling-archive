@@ -15,19 +15,20 @@ runners:
   config: |
     [[runners]]
       [runners.kubernetes]
+        image = "ubuntu:16.04"
         [[runners.kubernetes.volumes.host_path]]
           name = "read-tira-data-runs"
-          mount_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/runs/"
+          mount_path = "/mnt/ceph/tira/data/runs/"
           read_only = true
-          host_path = "/mnt/ceph/tira/data/runs/"
+          host_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/runs/"
         [[runners.kubernetes.volumes.host_path]]
           name = "read-tira-data-datasets-test-datasets-truth"
-          mount_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/datasets/test-datasets-truth/"
+          mount_path = "/mnt/ceph/tira/data/datasets/test-datasets-truth/"
           read_only = true
-          host_path = "/mnt/ceph/tira/data/datasets/test-datasets-truth/"
+          host_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/datasets/test-datasets-truth/"
         [[runners.kubernetes.volumes.host_path]]
           name = "read-tira-data-datasets-training-datasets-truth"
-          mount_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/datasets/training-datasets-truth/"
+          mount_path = "/mnt/ceph/tira/data/datasets/training-datasets-truth/"
           read_only = true
-          host_path = "/mnt/ceph/tira/data/datasets/training-datasets-truth/"
+          host_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/datasets/training-datasets-truth/"
 

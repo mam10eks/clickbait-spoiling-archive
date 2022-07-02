@@ -17,8 +17,8 @@ copy-evaluation-to-tira:
   stage: copy-evaluation-to-tira
   script:
     - echo "This job moves the evaluation result to the TIRA directory. ToDo here, we need write-tira-data-runs"
-  tags:
-    - write-tira-data-runs
     - ls /mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/
     - ls /mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/runs/
+  tags:
+    - write-tira-data-runs
 

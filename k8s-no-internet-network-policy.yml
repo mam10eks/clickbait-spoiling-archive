@@ -29,8 +29,4 @@ spec:
         - ipBlock:
             # Allow access to betaweb
             cidr: 141.54.0.0/16
-            # Allow access to the kubernetes pod (for DNS). cluster_cidr is by default 10.42.0.0/16. See https://rancher.com/docs/rke/latest/en/config-options/services/
-    - to:
-        - ipBlock:
-            cidr: 10.42.0.0/16
 

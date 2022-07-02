@@ -18,6 +18,9 @@ runners:
         image = "ubuntu:16.04"
         [runners.kubernetes.pod_labels]
           role = "no-internet"
+        [[runners.kubernetes.host_aliases]]
+          ip = "141.54.132.157"
+          hostnames = ["git.webis.de"]
         [[runners.kubernetes.volumes.host_path]]
           name = "read-tira-data-runs"
           mount_path = "/mnt/ceph/tira/data/runs/"

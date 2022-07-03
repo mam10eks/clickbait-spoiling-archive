@@ -17,6 +17,10 @@ prepare-tira-environment:
     - cat task.env
   tags:
     - no-internet
+  rules:
+    # Only run if the commit message does not start with "TIRA-Automation:"
+    - if: $CI_COMMIT_MESSAGE !~ ^TIRA-Automation:
+
 
 run-user-software:
   stage: Run Software
@@ -36,6 +40,9 @@ run-user-software:
     - no-internet
     - read-tira-data-datasets-truth
     - read-tira-data-runs
+  rules:
+    # Only run if the commit message does not start with "TIRA-Automation:"
+    - if: $CI_COMMIT_MESSAGE !~ ^TIRA-Automation:
 
 persist-software-result:
   stage: Persist Software Result
@@ -50,6 +57,9 @@ persist-software-result:
     - run-user-software
   tags:
     - write-tira-data-runs,tira-git-credentials
+  rules:
+    # Only run if the commit message does not start with "TIRA-Automation:"
+    - if: $CI_COMMIT_MESSAGE !~ ^TIRA-Automation:
 
 evaluate-software-result:
   stage: Evaluate Software Result
@@ -69,6 +79,9 @@ evaluate-software-result:
     - no-internet
     - read-tira-data-datasets-truth
     - read-tira-data-runs
+  rules:
+    # Only run if the commit message does not start with "TIRA-Automation:"
+    - if: $CI_COMMIT_MESSAGE !~ ^TIRA-Automation:
 
 persist-evaluation-result:
   stage: Persist Evaluation Result
@@ -79,4 +92,8 @@ persist-evaluation-result:
     - evaluate-software-result
   tags:
     - write-tira-data-runs,tira-git-credentials
+  rules:
+    # Only run if the commit message does not start with "TIRA-Automation:"
+    - if: $CI_COMMIT_MESSAGE !~ ^TIRA-Automation:
+
 

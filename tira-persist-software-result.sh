@@ -26,7 +26,11 @@ if [ -d "$TARGET_DIR" ]; then
     exit 0
 fi
 
+echo "mkdir -p ${TARGET_DIR}/.."
 mkdir -p ${TARGET_DIR}/..
+
+echo "cp -r ${SRC_DIR} ${TARGET_DIR}"
 cp -r ${SRC_DIR} ${TARGET_DIR}
+
 env|grep 'TIRA' >> task.env
 

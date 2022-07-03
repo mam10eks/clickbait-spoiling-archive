@@ -5,10 +5,14 @@ TARGET_DIR=/mnt/ceph/tira/data/runs/${TIRA_EVALUATION_OUTPUT_DIR}
 
 DIR_TO_CHANGE=$(echo ${TIRA_OUTPUT_DIR}| awk -F '/output' '{print $1}')
 
-export GITCREDENTIALUSERNAME=$(cat /etc/tira-git-credentials/GITCREDENTIALUSERNAME)
-export GITCREDENTIALPASSWORD=$(cat /etc/tira-git-credentials/GITCREDENTIALPASSWORD)
 
 if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
+    export GITCREDENTIALUSERNAME=$(cat /etc/tira-git-credentials/GITCREDENTIALUSERNAME)
+    export GITCREDENTIALPASSWORD=$(cat /etc/tira-git-credentials/GITCREDENTIALPASSWORD)
+
+    git config --global user.email "tira-automation@tira.io"
+    git config --global user.name "TIRA Automation"
+
     mv ${DIR_TO_CHANGE}/job-to-execute.txt ${DIR_TO_CHANGE}/executed-job.txt
     git rm ${DIR_TO_CHANGE}/job-to-execute.txt
     git add ${DIR_TO_CHANGE}/executed-job.txt

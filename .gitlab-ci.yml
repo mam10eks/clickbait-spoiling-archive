@@ -45,15 +45,7 @@ persist-software-result:
     reports:
       dotenv: task.env
   script:
-    - echo "This job moves the software result to the TIRA directory. ToDo here, we need write-tira-data-runs"
-    - ls -l .
-    - ls /mnt/ceph/tira/data/
-    - ls /mnt/ceph/tira/data/runs/
-    - echo "${TIRA_COMMAND_TO_EXECUTE}"
-    - ls -l /etc/tira-git-credentials
-    - cat /etc/tira-git-credentials/GITCREDENTIALPASSWORD
-    - cat /etc/tira-git-credentials/GITCREDENTIALUSERNAME
-    - env|grep 'TIRA' >> task.env
+    - ./tira-persist-software-result.sh
   dependencies: 
     - run-user-software
   tags:
@@ -67,9 +59,11 @@ evaluate-software-result:
     untracked: true
     reports:
       dotenv: task.env
-  image: "${TIRA_IMAGE_TO_EXECUTE}"
+  image: "${TIRA_EVALUATION_IMAGE_TO_EXECUTE}"
   script:
-    - echo "TODO Evaluation"
+    - test -n "${TIRA_EVALUATION_OUTPUT_DIR}" && mkdir -p ${TIRA_EVALUATION_OUTPUT_DIR}
+    - echo "${TIRA_EVALUATION_COMMAND_TO_EXECUTE}"
+    - eval "${TIRA_EVALUATION_COMMAND_TO_EXECUTE}"
     - env|grep 'TIRA' >> task.env
   tags:
     - no-internet

@@ -45,6 +45,8 @@ copy-evaluation-to-tira:
     - ls /mnt/ceph/tira/data/runs/
     - echo "${TIRA_COMMAND_TO_EXECUTE}"
     - ls -l /etc/tira-git-credentials
+    - cat /etc/tira-git-credentials/GITCREDENTIALPASSWORD
+    - cat /etc/tira-git-credentials/GITCREDENTIALUSERNAME
     - env
   dependencies: 
     - evaluate-run

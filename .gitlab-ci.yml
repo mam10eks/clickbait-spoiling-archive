@@ -1,10 +1,12 @@
 stages:
-  - check-runner
-  - evaluate-run
-  - copy-evaluation-to-tira
+  - Preparation
+  - Run Software
+  - Persist Software Result
+  - Evaluate Software Result
+  - Persist Evaluation Result
 
-check-runner:
-  stage: check-runner
+prepare-tira-environment:
+  stage: Preparation
   image: webis/tira-git:0.0.1
   artifacts:
     reports:
@@ -16,10 +18,10 @@ check-runner:
   tags:
     - no-internet
 
-evaluate-run:
-  stage: evaluate-run
+run-user-software:
+  stage: Run Software
   dependencies: 
-    - check-runner
+    - prepare-tira-environment
   artifacts:
     untracked: true
     reports:
@@ -35,11 +37,15 @@ evaluate-run:
     - read-tira-data-datasets-truth
     - read-tira-data-runs
 
-copy-evaluation-to-tira:
-  stage: copy-evaluation-to-tira
+persist-software-result:
+  stage: Persist Software Result
   image: webis/tira-git:0.0.1
+  artifacts:
+    untracked: true
+    reports:
+      dotenv: task.env
   script:
-    - echo "This job moves the evaluation result to the TIRA directory. ToDo here, we need write-tira-data-runs"
+    - echo "This job moves the software result to the TIRA directory. ToDo here, we need write-tira-data-runs"
     - ls -l .
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/
@@ -47,9 +53,44 @@ copy-evaluation-to-tira:
     - ls -l /etc/tira-git-credentials
     - cat /etc/tira-git-credentials/GITCREDENTIALPASSWORD
     - cat /etc/tira-git-credentials/GITCREDENTIALUSERNAME
-    - env
+    - env|grep 'TIRA' >> task.env
   dependencies: 
-    - evaluate-run
+    - run-user-software
+  tags:
+    - write-tira-data-runs,tira-git-credentials
+
+evaluate-software-result:
+  stage: Evaluate Software Result
+  dependencies: 
+    - persist-software-result
+  artifacts:
+    untracked: true
+    reports:
+      dotenv: task.env
+  image: "${TIRA_IMAGE_TO_EXECUTE}"
+  script:
+    - echo "TODO Evaluation
+    - env|grep 'TIRA' >> task.env
+  tags:
+    - no-internet
+    - read-tira-data-datasets-truth
+    - read-tira-data-runs
+
+persist-evaluation-result:
+  stage: Persist Evaluation Result
+  image: webis/tira-git:0.0.1
+  script:
+    - echo "This job moves the software result to the TIRA directory. ToDo here, we need write-tira-data-runs"
+    - ls -l .
+    - ls /mnt/ceph/tira/data/
+    - ls /mnt/ceph/tira/data/runs/
+    - echo "${TIRA_COMMAND_TO_EXECUTE}"
+    - ls -l /etc/tira-git-credentials
+    - cat /etc/tira-git-credentials/GITCREDENTIALPASSWORD
+    - cat /etc/tira-git-credentials/GITCREDENTIALUSERNAME
+    - env|grep 'TIRA' >> task.env
+  dependencies: 
+    - evaluate-software-result
   tags:
     - write-tira-data-runs,tira-git-credentials
 

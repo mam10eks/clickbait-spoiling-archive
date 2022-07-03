@@ -69,7 +69,7 @@ evaluate-software-result:
       dotenv: task.env
   image: "${TIRA_IMAGE_TO_EXECUTE}"
   script:
-    - echo "TODO Evaluation
+    - echo "TODO Evaluation"
     - env|grep 'TIRA' >> task.env
   tags:
     - no-internet
@@ -88,7 +88,7 @@ persist-evaluation-result:
     - ls -l /etc/tira-git-credentials
     - cat /etc/tira-git-credentials/GITCREDENTIALPASSWORD
     - cat /etc/tira-git-credentials/GITCREDENTIALUSERNAME
-    - env|grep 'TIRA' >> task.env
+    - env
   dependencies: 
     - evaluate-software-result
   tags:

@@ -3,7 +3,7 @@
 SRC_DIR=${TIRA_OUTPUT_DIR}
 TARGET_DIR=/mnt/ceph/tira/data/runs/${TIRA_OUTPUT_DIR}
 
-TIRA_EVALUATION_OUTPUT_DIR="${TARGET_DIR}/../$(date +'%Y-%m-%d-%I-%M-%S')/output"
+TIRA_EVALUATION_OUTPUT_DIR="${SRC_DIR}/../$(date +'%Y-%m-%d-%I-%M-%S')/output"
 echo "TIRA_EVALUATION_INPUT_DIR=${TARGET_DIR}" >> ${JOB_DIR}/job-to-execute.txt
 echo "TIRA_EVALUATION_OUTPUT_DIR=${TIRA_EVALUATION_OUTPUT_DIR}" >> ${JOB_DIR}/job-to-execute.txt
 

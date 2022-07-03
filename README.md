@@ -1,4 +1,4 @@
-# tira-git: Evaluation as a Service on Confidential Data With Git
+# TIRA over Git: Evaluation-as-a-Service on Confidential Data With tira-git
 
 The TIRA protocoll implemented in standard git workflows.
 

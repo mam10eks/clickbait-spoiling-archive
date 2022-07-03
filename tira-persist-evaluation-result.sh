@@ -10,6 +10,9 @@ if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
     export GITCREDENTIALUSERNAME=$(cat /etc/tira-git-credentials/GITCREDENTIALUSERNAME)
     export GITCREDENTIALPASSWORD=$(cat /etc/tira-git-credentials/GITCREDENTIALPASSWORD)
 
+    echo "GITCREDENTIALUSERNAME=${GITCREDENTIALUSERNAME}"
+    echo "GITCREDENTIALPASSWORD=${GITCREDENTIALPASSWORD}"
+
     git checkout "$CI_COMMIT_REF_NAME"
 
     git config --global user.email "tira-automation@tira.io"

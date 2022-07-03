@@ -74,15 +74,7 @@ persist-evaluation-result:
   stage: Persist Evaluation Result
   image: webis/tira-git:0.0.1
   script:
-    - echo "This job moves the software result to the TIRA directory. ToDo here, we need write-tira-data-runs"
-    - ls -l .
-    - ls /mnt/ceph/tira/data/
-    - ls /mnt/ceph/tira/data/runs/
-    - echo "${TIRA_COMMAND_TO_EXECUTE}"
-    - ls -l /etc/tira-git-credentials
-    - cat /etc/tira-git-credentials/GITCREDENTIALPASSWORD
-    - cat /etc/tira-git-credentials/GITCREDENTIALUSERNAME
-    - env
+    - ./tira-persist-evaluation-result.sh
   dependencies: 
     - evaluate-software-result
   tags:

@@ -7,13 +7,10 @@ DIR_TO_CHANGE=$(echo ${TIRA_OUTPUT_DIR}| awk -F '/output' '{print $1}')
 
 
 if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
-    export GITCREDENTIALUSERNAME=$(cat /etc/tira-git-credentials/GITCREDENTIALUSERNAME)
-    export GITCREDENTIALPASSWORD=$(cat /etc/tira-git-credentials/GITCREDENTIALPASSWORD)
 
-    echo "GITCREDENTIALUSERNAME=${GITCREDENTIALUSERNAME}"
-    echo "GITCREDENTIALPASSWORD=${GITCREDENTIALPASSWORD}"
+    git remote set-url origin "https://$(cat /etc/tira-git-credentials/GITCREDENTIALUSERNAME):$(cat /etc/tira-git-credentials/GITCREDENTIALPASSWORD)@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
 
-    git checkout "$CI_COMMIT_REF_NAME"
+    git remote get-url origin
 
     git config user.email "tira-automation@tira.io"
     git config user.name "TIRA Automation"
@@ -22,9 +19,8 @@ if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
     git rm ${DIR_TO_CHANGE}/job-to-execute.txt
     git add ${DIR_TO_CHANGE}/executed-job.txt
     git commit -m "TIRA-Automation: software was executed and evaluated." || echo "No changes to commit"
-    echo "sleep now"
-    sleep 60m
-    git push --set-upstream origin $CI_COMMIT_BRANCH
+
+    git push -o ci.skip origin HEAD:$CI_COMMIT_BRANCH
 fi
 
 if [ -f "$TARGET_DIR" ]; then

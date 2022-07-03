@@ -12,7 +12,7 @@ rbac:
 runners:
   name: gitlab-gitlab-runner-tira-copy
   Description: Copy runs from user software or evaluators to TIRA.
-  tags: write-tira-data-runs
+  tags: write-tira-data-runs,tira-git-credentials
   config: |
     [[runners]]
       [runners.kubernetes]
@@ -22,3 +22,8 @@ runners:
           mount_path = "/mnt/ceph/tira/data/runs/"
           read_only = false
           host_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/runs/"
+        [[runners.kubernetes.volumes.secret]]
+          name = "tira-git-credentials"
+          mount_path = "/etc/tira-git-credentials"
+          read_only = true
+

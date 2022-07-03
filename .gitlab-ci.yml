@@ -5,7 +5,7 @@ stages:
 
 check-runner:
   stage: check-runner
-  image: curlimages/curl
+  image: webis/tira-git:0.0.1
   artifacts:
     reports:
       dotenv: task.env
@@ -37,14 +37,17 @@ evaluate-run:
 
 copy-evaluation-to-tira:
   stage: copy-evaluation-to-tira
+  image: webis/tira-git:0.0.1
   script:
     - echo "This job moves the evaluation result to the TIRA directory. ToDo here, we need write-tira-data-runs"
     - ls -l .
     - ls /mnt/ceph/tira/data/
     - ls /mnt/ceph/tira/data/runs/
     - echo "${TIRA_COMMAND_TO_EXECUTE}"
+    - ls -l /etc/tira-git-credentials
+    - env
   dependencies: 
     - evaluate-run
   tags:
-    - write-tira-data-runs
+    - write-tira-data-runs,tira-git-credentials
 

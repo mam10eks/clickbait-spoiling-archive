@@ -10,6 +10,13 @@ kubectl -n kibi9872 apply -f k8s-tira-service-account.yml
 kubectl -n kibi9872 apply -f k8s-no-internet-network-policy.yml
 ```
 
+Create the `tira-git-credentials` secret so that the corresponding pods can have access to the git secrets (create a git token for the group).
+
+```
+./k8s-deploy-tira-git-credentials-as-secret.sh <TOKEN-FOR-THE-GROUP>
+```
+
+
 To start from scratch, run:
 
 ```

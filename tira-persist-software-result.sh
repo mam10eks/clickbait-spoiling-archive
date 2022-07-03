@@ -26,8 +26,8 @@ if [ -d "$TARGET_DIR" ]; then
     exit 0
 fi
 
-echo "mkdir -p ${TARGET_DIR}/.."
-mkdir -p ${TARGET_DIR}/..
+echo "mkdir -p $(echo ${TARGET_DIR}| awk -F '/output' '{print $1}')"
+mkdir -p "$(echo ${TARGET_DIR}| awk -F '/output' '{print $1}')"
 
 echo "cp -r ${SRC_DIR} ${TARGET_DIR}"
 cp -r ${SRC_DIR} ${TARGET_DIR}

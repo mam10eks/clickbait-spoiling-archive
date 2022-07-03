@@ -15,13 +15,15 @@ if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
 
     git checkout "$CI_COMMIT_REF_NAME"
 
-    git config --global user.email "tira-automation@tira.io"
-    git config --global user.name "TIRA Automation"
+    git config user.email "tira-automation@tira.io"
+    git config user.name "TIRA Automation"
 
     mv ${DIR_TO_CHANGE}/job-to-execute.txt ${DIR_TO_CHANGE}/executed-job.txt
     git rm ${DIR_TO_CHANGE}/job-to-execute.txt
     git add ${DIR_TO_CHANGE}/executed-job.txt
     git commit -m "TIRA-Automation: software was executed and evaluated." || echo "No changes to commit"
+    echo "sleep now"
+    sleep 60m
     git push --set-upstream origin $CI_COMMIT_BRANCH
 fi
 

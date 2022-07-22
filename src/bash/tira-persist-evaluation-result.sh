@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
 SRC_DIR=${TIRA_EVALUATION_OUTPUT_DIR}
-TARGET_DIR=/mnt/ceph/tira/data/runs/${TIRA_EVALUATION_OUTPUT_DIR}
 
 DIR_TO_CHANGE=$(echo ${TIRA_OUTPUT_DIR}| awk -F '/output' '{print $1}')
 
@@ -25,21 +24,21 @@ else
     echo "The file ${DIR_TO_CHANGE}/job-to-execute.txt does not exist, I cant change it."
 fi
 
-if [ -f "$TARGET_DIR" ]; then
-    echo "$TARGET_DIR exists already. Exit."
+if [ -f "${TIRA_FINAL_EVALUATION_OUTPUT_DIR}" ]; then
+    echo "${TIRA_FINAL_EVALUATION_OUTPUT_DIR} exists already. Exit."
     exit 0
 fi
 
-if [ -d "$TARGET_DIR" ]; then
-    echo "$TARGET_DIR exists already. Exit."
+if [ -d "${TIRA_FINAL_EVALUATION_OUTPUT_DIR}" ]; then
+    echo "${TIRA_FINAL_EVALUATION_OUTPUT_DIR} exists already. Exit."
     exit 0
 fi
 
-echo "mkdir -p $(echo ${TARGET_DIR}| awk -F '/output' '{print $1}')"
-mkdir -p "$(echo ${TARGET_DIR}| awk -F '/output' '{print $1}')"
+mkdir -p "${SRC_DIR}"
+mkdir -p "${TIRA_FINAL_EVALUATION_OUTPUT_DIR}"
 
-echo "cp -r ${SRC_DIR} ${TARGET_DIR}"
-cp -r ${SRC_DIR} ${TARGET_DIR}
+echo "cp -r ${SRC_DIR} ${TIRA_FINAL_EVALUATION_OUTPUT_DIR}"
+cp -r ${SRC_DIR} ${TIRA_FINAL_EVALUATION_OUTPUT_DIR}
 
 env|grep 'TIRA' >> task.env
 

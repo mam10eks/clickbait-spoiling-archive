@@ -17,8 +17,11 @@ def fail_if_environment_variables_are_missing():
 def run_output_dir():
     return settings.TIRA_ROOT / 'data' / 'runs' / os.environ['TIRA_DATASET_ID'] / os.environ['TIRA_VM_ID'] / os.environ['TIRA_RUN_ID'] / 'output'
 
-def eval_dir():
-    return Path(os.environ['TIRA_OUTPUT_DIR']) / '..' / '..' / dt.now().strftime('%Y-%m-%d-%H-%M-%S')
+def eval_dir(eval_id):
+    return Path(os.environ['TIRA_OUTPUT_DIR']) / '..' / '..' / eval_id
+    
+def final_eval_dir(eval_id):
+    return settings.TIRA_ROOT / 'data' / 'runs' / os.environ['TIRA_DATASET_ID'] / os.environ['TIRA_VM_ID'] / eval_id
 
 def copy_resources():
     if exists(str(run_output_dir())):
@@ -42,6 +45,7 @@ def extract_evaluation_commands(evaluator):
 
 def identify_environment_variables():
     db = get_tira_db()
+    eval_id = dt.now().strftime('%Y-%m-%d-%H-%M-%S')
     ret = set()
     for (k,v) in os.environ.items() :
         if k.lower().startswith('tira'):
@@ -49,8 +53,9 @@ def identify_environment_variables():
     evaluator = extract_evaluation_commands(db.get_evaluator(os.environ['TIRA_DATASET_ID'], os.environ['TIRA_TASK_ID']))
     ret.add('TIRA_EVALUATION_INPUT_DIR=' + str(run_output_dir()))
     ret.add('inputRun=' + str(run_output_dir()))
-    ret.add('TIRA_EVALUATION_OUTPUT_DIR=' + str(eval_dir() / 'output'))
-    ret.add('outputDir=' + str(eval_dir() / 'output'))
+    ret.add('TIRA_EVALUATION_OUTPUT_DIR=' + str(eval_dir(eval_id) / 'output'))
+    ret.add('TIRA_FINAL_EVALUATION_OUTPUT_DIR=' + str(final_eval_dir(eval_id)))
+    ret.add('outputDir=' + str(eval_dir(eval_id) / 'output'))
     ret.add('TIRA_EVALUATION_IMAGE_TO_EXECUTE=' + evaluator['TIRA_EVALUATION_IMAGE_TO_EXECUTE'])
     ret.add('TIRA_EVALUATION_COMMAND_TO_EXECUTE=' + evaluator['TIRA_EVALUATION_COMMAND_TO_EXECUTE'])
 

@@ -18,7 +18,7 @@ def run_output_dir():
     return settings.TIRA_ROOT / 'data' / 'runs' / os.environ['TIRA_DATASET_ID'] / os.environ['TIRA_VM_ID'] / os.environ['TIRA_RUN_ID'] / 'output'
 
 def eval_dir():
-    return settings.TIRA_ROOT / 'data' / 'runs' / os.environ['TIRA_DATASET_ID'] / os.environ['TIRA_VM_ID'] / dt.now().strftime('%Y-%m-%d-%H-%M-%S')
+    return Path(os.environ['TIRA_OUTPUT_DIR']) / '..' / '..' / dt.now().strftime('%Y-%m-%d-%H-%M-%S')
 
 def copy_resources():
     if exists(run_output_dir()):
@@ -28,9 +28,9 @@ def copy_resources():
     if not exists(os.environ['TIRA_OUTPUT_DIR']):
         Path(os.environ['TIRA_OUTPUT_DIR']).mkdir(parents=True, exist_ok=True)
     
-    Path(eval_dir()).mkdir(parents=True, exist_ok=True)
+    Path(run_output_dir()).mkdir(parents=True, exist_ok=True)
     
-    shutil.copytree(os.environ['TIRA_OUTPUT_DIR'], str(eval_dir() / 'output' ))
+    shutil.copytree(os.environ['TIRA_OUTPUT_DIR'], str(run_output_dir()))
 
 def extract_evaluation_commands(evaluator):
     try:

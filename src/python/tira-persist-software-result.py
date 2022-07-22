@@ -48,10 +48,12 @@ def identify_environment_variables():
             ret.add((k + '=' + v).strip())
     evaluator = extract_evaluation_commands(db.get_evaluator(os.environ['TIRA_DATASET_ID'], os.environ['TIRA_TASK_ID']))
     ret.add('TIRA_EVALUATION_INPUT_DIR=' + str(run_output_dir()))
+    ret.add('inputRun=' + str(run_output_dir()))
     ret.add('TIRA_EVALUATION_OUTPUT_DIR=' + str(eval_dir() / 'output'))
+    ret.add('outputDir=' + str(eval_dir() / 'output'))
     ret.add('TIRA_EVALUATION_IMAGE_TO_EXECUTE=' + evaluator['TIRA_EVALUATION_IMAGE_TO_EXECUTE'])
     ret.add('TIRA_EVALUATION_COMMAND_TO_EXECUTE=' + evaluator['TIRA_EVALUATION_COMMAND_TO_EXECUTE'])
-    
+
     return sorted(list(ret))
 
 if __name__ == '__main__':

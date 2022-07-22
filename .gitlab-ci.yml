@@ -7,7 +7,7 @@ stages:
 
 prepare-tira-environment:
   stage: Preparation
-  image: webis/tira-git:0.0.8
+  image: webis/tira-git:0.0.9
   artifacts:
     reports:
       dotenv: task.env
@@ -38,7 +38,7 @@ run-user-software:
 
 persist-software-result:
   stage: Persist Software Result
-  image: webis/tira-git:0.0.8
+  image: webis/tira-git:0.0.9
   artifacts:
     untracked: true
     reports:
@@ -72,7 +72,7 @@ evaluate-software-result:
 
 persist-evaluation-result:
   stage: Persist Evaluation Result
-  image: webis/tira-git:0.0.8
+  image: webis/tira-git:0.0.9
   script:
     - tira-persist-evaluation-result.sh
   dependencies: 

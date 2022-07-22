@@ -21,11 +21,11 @@ def eval_dir():
     return Path(os.environ['TIRA_OUTPUT_DIR']) / '..' / '..' / dt.now().strftime('%Y-%m-%d-%H-%M-%S')
 
 def copy_resources():
-    if exists(run_output_dir()):
+    if exists(str(run_output_dir())):
         print(str(run_output_dir()) + " exists already. I do not overwrite.")
         return
     
-    if not exists(os.environ['TIRA_OUTPUT_DIR']):
+    if not exists(str(os.environ['TIRA_OUTPUT_DIR'])):
         Path(os.environ['TIRA_OUTPUT_DIR']).mkdir(parents=True, exist_ok=True)
     
     Path(run_output_dir()).mkdir(parents=True, exist_ok=True)

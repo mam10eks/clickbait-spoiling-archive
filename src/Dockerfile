@@ -1,11 +1,19 @@
-FROM ubuntu:22.10
+FROM registry.webis.de/code-lib/public-images/tira-application:0.0.12
 
-RUN apt-get update \
-	&& apt-get -y install git curl npm
+RUN apk add bash git curl
 
 COPY bash/tira-persist-software-result.sh \
+	python/tira-persist-software-result.py \
 	bash/tira-test-runner-is-trustworthy.sh \
 	bash/tira-persist-evaluation-result.sh \
-	bash/tira-specify-task-to-run.sh \
+	python/tira-specify-task-to-run.py \
 	/usr/local/bin/
+
+ENV DJANGO_SETTINGS_MODULE=django_tira_git.settings
+
+COPY python/tira/git_integration /tira/application/src/tira/git_integration
+COPY django_tira_git /tira/application/src/django_tira_git
+COPY config/config.yml /tira/application/src/config/tira-git-config.yml
+
+ENTRYPOINT bash
 

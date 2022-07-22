@@ -7,13 +7,13 @@ stages:
 
 prepare-tira-environment:
   stage: Preparation
-  image: webis/tira-git:0.0.2
+  image: webis/tira-git:0.0.3
   artifacts:
     reports:
       dotenv: task.env
   script:
     - tira-test-runner-is-trustworthy.sh
-    - tira-specify-task-to-run.sh > task.env
+    - tira-specify-task-to-run.py > task.env
     - cat task.env
   tags:
     - no-internet
@@ -34,18 +34,17 @@ run-user-software:
     - env|grep 'TIRA' > task.env
   tags:
     - no-internet
-    - read-tira-data-datasets-truth
-    - read-tira-data-runs
+    - read-tira-data-datasets
 
 persist-software-result:
   stage: Persist Software Result
-  image: webis/tira-git:0.0.2
+  image: webis/tira-git:0.0.3
   artifacts:
     untracked: true
     reports:
       dotenv: task.env
   script:
-    - tira-persist-software-result.sh
+    - tira-persist-software-result.py
   dependencies: 
     - run-user-software
   tags:
@@ -73,7 +72,7 @@ evaluate-software-result:
 
 persist-evaluation-result:
   stage: Persist Evaluation Result
-  image: webis/tira-git:0.0.2
+  image: webis/tira-git:0.0.3
   script:
     - tira-persist-evaluation-result.sh
   dependencies: 

@@ -30,7 +30,7 @@ def copy_resources():
     
     Path(eval_dir()).mkdir(parents=True, exist_ok=True)
     
-    shutil.copy(os.environ['TIRA_OUTPUT_DIR'], str(eval_dir() / 'output' ))
+    shutil.copytree(os.environ['TIRA_OUTPUT_DIR'], str(eval_dir() / 'output' ))
 
 def extract_evaluation_commands(evaluator):
     try:

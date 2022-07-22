@@ -10,6 +10,7 @@ COPY bash/tira-persist-software-result.sh \
 	/usr/local/bin/
 
 ENV DJANGO_SETTINGS_MODULE=django_tira_git.settings
+ENV PYTHONPATH=/tira/application/src/
 
 COPY python/tira/git_integration /tira/application/src/tira/git_integration
 COPY django_tira_git /tira/application/src/django_tira_git

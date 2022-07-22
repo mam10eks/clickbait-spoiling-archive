@@ -19,6 +19,11 @@ runners:
         image = "ubuntu:16.04"
         [[runners.kubernetes.volumes.host_path]]
           name = "read-tira-data-datasets-test-datasets"
+          mount_path = "/mnt/ceph/tira/"
+          read_only = true
+          host_path = "/mnt/ceph/tira/"
+        [[runners.kubernetes.volumes.host_path]]
+          name = "write-tira-data-runs"
           mount_path = "/mnt/ceph/tira/data/runs/"
           read_only = false
           host_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/runs/"

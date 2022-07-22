@@ -1,4 +1,4 @@
-IMAGE_VERSION=0.0.3
+IMAGE_VERSION=0.0.4
 
 build-tira-git-docker:
 	docker build -t webis/tira-git:${IMAGE_VERSION} src

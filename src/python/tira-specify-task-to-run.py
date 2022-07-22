@@ -32,7 +32,7 @@ def identify_environment_variables(job_file):
                 ret += [l.strip()]
     
     for i in ['TIRA_TASK_ID', 'TIRA_IMAGE_TO_EXECUTE', 'TIRA_COMMAND_TO_EXECUTE']:
-        if len([j for j in ret if i in j] != 1:
+        if len([j for j in ret if i in j]) != 1:
             raise ValueError('I expected the variable "' + i + '" to be defined by the job, but it is missing.')
     
     return ret

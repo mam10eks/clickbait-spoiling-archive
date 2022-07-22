@@ -32,6 +32,7 @@ run-user-software:
     - echo "${TIRA_COMMAND_TO_EXECUTE}"
     - eval "${TIRA_COMMAND_TO_EXECUTE}"
     - env|grep 'TIRA' > task.env
+  allow_failure: true
   tags:
     - no-internet
     - read-tira-data-datasets
@@ -65,6 +66,7 @@ evaluate-software-result:
     - echo "${TIRA_EVALUATION_COMMAND_TO_EXECUTE}"
     - eval "${TIRA_EVALUATION_COMMAND_TO_EXECUTE}"
     - env|grep 'TIRA' > task.env
+  allow_failure: true
   tags:
     - no-internet
     - read-tira-data-datasets-truth

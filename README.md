@@ -16,7 +16,7 @@ docker run \
 	-v ${PWD}/src/:/tira/application/src/tira-git:ro \
 	-v /mnt/ceph/tira/:/mnt/ceph/tira/:ro \
 	-w /tira/application/src/tira-git \
-	--rm -ti webis/tira-git:0.0.5
+	--rm -ti webis/tira-git:0.0.13
 
 TIRA_TASK_ID=clickbait-spoiling TIRA_OUTPUT_DIR=. TIRA_VM_ID=princess-knight TIRA_DATASET_ID=clickbait-spoiling-task-01-validation-dataset-2022-08-01 TIRA_RUN_ID=2022-07-20-12-54-28 /usr/local/bin/tira-persist-software-result.py
 

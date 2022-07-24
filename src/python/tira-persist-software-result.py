@@ -38,10 +38,10 @@ def copy_resources():
     persist_tira_metadata_for_job(str(run_output_dir() / '..'), os.environ['TIRA_RUN_ID'], 'run-user-software')
 
 def extract_evaluation_commands(evaluator):
+    eval_id = 'TODO-use-real-evaluator-id' #TODO evaluator['evaluatorId']
     try:
         evaluator = json.loads(evaluator['command'])
-        
-        return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': evaluator['image'], 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': evaluator['command'], 'TIRA_EVALUATION_SOFTWARE_ID': evaluator['id']}
+        return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': evaluator['image'], 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': evaluator['command'], 'TIRA_EVALUATION_SOFTWARE_ID': eval_id}
     except:
         return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': 'ubuntu:16.04', 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': 'echo "No evaluation specified..."', 'TIRA_EVALUATION_SOFTWARE_ID': '-1'}
 

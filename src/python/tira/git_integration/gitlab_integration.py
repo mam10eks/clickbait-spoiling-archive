@@ -3,6 +3,7 @@ import gitlab
 import os
 import uuid
 import string
+from subprocess import check_output
 
 def read_creds(name):
     return open('/etc/tira-git-credentials/' + name).read().strip()

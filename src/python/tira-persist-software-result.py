@@ -8,6 +8,7 @@ from tira.git_integration import get_tira_db
 import os
 from django.conf import settings
 import shutil
+from tira.git_integration.gitlab_integration import persist_tira_metadata_for_job
 
 def fail_if_environment_variables_are_missing():
     for v in ['TIRA_DATASET_ID', 'TIRA_VM_ID', 'TIRA_RUN_ID', 'TIRA_OUTPUT_DIR', 'TIRA_TASK_ID']:
@@ -34,6 +35,7 @@ def copy_resources():
     Path(run_output_dir()).mkdir(parents=True, exist_ok=True)
     
     shutil.copytree(os.environ['TIRA_OUTPUT_DIR'], str(run_output_dir()))
+    persist_tira_metadata_for_job(str(run_output_dir() / '..'), os.environ['TIRA_RUN_ID'], 'run-user-software')
 
 def extract_evaluation_commands(evaluator):
     try:

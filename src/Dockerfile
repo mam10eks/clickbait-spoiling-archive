@@ -1,6 +1,8 @@
 FROM registry.webis.de/code-lib/public-images/tira-application:0.0.12
 
-RUN apk add bash git curl
+RUN apk add bash git curl openssh-client
+
+RUN pip3 install python-gitlab GitPython
 
 COPY bash/tira-persist-software-result.sh \
 	python/tira-persist-software-result.py \

@@ -39,9 +39,9 @@ def extract_evaluation_commands(evaluator):
     try:
         evaluator = json.loads(evaluator['command'])
         
-        return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': evaluator['image'], 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': evaluator['command']}
+        return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': evaluator['image'], 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': evaluator['command'], 'TIRA_EVALUATION_SOFTWARE_ID': evaluator['id']}
     except:
-        return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': 'ubuntu:16.04', 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': 'echo "No evaluation specified..."'}
+        return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': 'ubuntu:16.04', 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': 'echo "No evaluation specified..."', 'TIRA_EVALUATION_SOFTWARE_ID': '-1'}
 
 def identify_environment_variables():
     db = get_tira_db()
@@ -58,6 +58,7 @@ def identify_environment_variables():
     ret.add('outputDir=' + str(eval_dir(eval_id) / 'output'))
     ret.add('TIRA_EVALUATION_IMAGE_TO_EXECUTE=' + evaluator['TIRA_EVALUATION_IMAGE_TO_EXECUTE'])
     ret.add('TIRA_EVALUATION_COMMAND_TO_EXECUTE=' + evaluator['TIRA_EVALUATION_COMMAND_TO_EXECUTE'])
+    ret.add('TIRA_EVALUATION_SOFTWARE_ID=' + evaluator['TIRA_EVALUATION_SOFTWARE_ID'])
 
     return sorted(list(ret))
 

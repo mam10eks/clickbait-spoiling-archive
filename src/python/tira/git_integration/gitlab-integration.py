@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import gitlab
 import os
+import uuid
 import string
 
 def read_creds(name):
     return open('/etc/tira-git-credentials/' + name).read().strip()
-
 
 def gitlab_client():
     return gitlab.Gitlab('https://' + os.environ['CI_SERVER_HOST'], private_token=read_creds('GITCREDENTIALPRIVATETOKEN'))
@@ -27,21 +27,71 @@ def clean_job_output(ret):
     else:
         raise ValueError('The format of the output seems to be changed...\n\n' + ret)
 
+def clean_job_command(ret):
+    ret = ''.join(filter(lambda x: x in string.printable, ret.strip()))
+    
+    if '$ echo "${TIRA_COMMAND_TO_EXECUTE}"[0;m' in ret and '[32;1m$ eval "${TIRA_COMMAND_TO_EXECUTE}"' in ret:
+        return ret.split('$ echo "${TIRA_COMMAND_TO_EXECUTE}"[0;m')[1].split('[32;1m$ eval "${TIRA_COMMAND_TO_EXECUTE}"')[0].strip()
+    if '$ echo "${TIRA_EVALUATION_COMMAND_TO_EXECUTE}"[0;m' in ret and '[32;1m$ eval "${TIRA_EVALUATION_COMMAND_TO_EXECUTE}"' in ret:
+        return ret.split('$ echo "${TIRA_EVALUATION_COMMAND_TO_EXECUTE}"[0;m')[1].split('[32;1m$ eval "${TIRA_EVALUATION_COMMAND_TO_EXECUTE}"')[0].strip()
 
-def job_trace(name):
+    raise ValueError('The format of the output seems to be changed...\n\n' + ret)
+
+def get_job(name):
     gl = gitlab_client()
     gl_project = gl.projects.get(int(os.environ['CI_PROJECT_ID']))
     gl_pipeline = gl_project.pipelines.get(int(os.environ['CI_PIPELINE_ID']))
     
     for job in gl_pipeline.jobs.list():
         if job.name == name:
-            job = gl_project.jobs.get(job.id)
-            return clean_job_output(job.trace().decode('UTF-8'))
-    
+            return gl_project.jobs.get(job.id)
+
     raise ValueError('I could not find the job trace.')
 
+def job_trace(name):
+    return clean_job_output(get_job(name).trace().decode('UTF-8'))
+    
+def job_command(name):
+    return clean_job_command(get_job(name).trace().decode('UTF-8'))
+
+def run_prototext(run_id, job_name):
+    inputRun = os.environ['TIRA_RUN_ID'] if ('evaluate-software-result' == job_name) else 'none'
+    software_id = os.environ['TIRA_USER_SOFTWARE_ID'] if ('run-user-software' == job_name) else os.environ['TIRA_EVALUATION_SOFTWARE_ID']
+
+    return '''softwareId: "software''' + str(software_id) + '''"
+runId: "'''+ run_id + '''"
+inputDataset: "''' + os.environ['TIRA_DATASET_ID'] + '''"
+inputRun: "''' + inputRun + '''"
+downloadable: false
+deleted: false
+taskId: "''' + os.environ['TIRA_TASK_ID'] + '''"
+accessToken: "''' + str(uuid.uuid4()) + '''"'''
+
+def persist_tira_metadata_for_job(run_dir, run_id, job_name):
+    with open(os.path.join(run_dir, 'run.prototext'), 'w') as f:
+        f.write(run_prototext(run_id, job_name))
+
+    with open(os.path.join(run_dir, 'file-list.txt'), 'wb') as f:
+        file_list = check_output(['tree', '-ahv', os.path.join(run_dir, 'output')])
+        f.write(file_list)
+
+    with open(os.path.join(run_dir, 'stdout.txt'), 'w') as f:
+        f.write(job_trace(job_name) + '\n')
+
+    with open(os.path.join(run_dir, 'stderr.txt'), 'w') as f:
+        f.write('################################################################\n# Executed Command\n################################################################\n'+  job_command(job_name) + '\n################################################################\n')
+
+    with open(os.path.join(run_dir, 'size.txt'), 'wb') as f:
+        f.write(check_output(['bash', '-c', '(du -sb "' + run_dir + '" && du -hs "' +  run_dir + '") | cut -f1']))
+        f.write(check_output(['bash', '-c', 'find "' + os.path.join(run_dir, 'output') + '" -type f -exec cat {} + | wc -l']))
+        f.write(check_output(['bash', '-c', 'find "' + os.path.join(run_dir, 'output') + '" -type f | wc -l']))
+        f.write(check_output(['bash', '-c', 'find "' + os.path.join(run_dir, 'output') + '" -type d | wc -l']))
+
 if __name__ == '__main__':
-    print(job_trace('run-user-software'))
     print('#####################################################################')
+    print(job_command('run-user-software') + '\n\n')
+    print(job_trace('run-user-software'))
+    print('\n\n\n#####################################################################')
+    print(job_command('evaluate-software-result') + '\n\n')
     print(job_trace('evaluate-software-result'))
 

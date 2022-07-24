@@ -4,8 +4,7 @@ RUN apk add bash git curl openssh-client
 
 RUN pip3 install python-gitlab GitPython
 
-COPY bash/tira-persist-software-result.sh \
-	python/tira-persist-software-result.py \
+COPY python/tira-persist-software-result.py \
 	bash/tira-test-runner-is-trustworthy.sh \
 	bash/tira-persist-evaluation-result.sh \
 	python/tira-specify-task-to-run.py \

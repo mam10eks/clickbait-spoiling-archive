@@ -3,6 +3,7 @@
 from git import Repo
 import argparse
 from tira.git_integration import get_tira_db
+from tira.git_integration.gitlab_integration import yield_all_running_pipelines
 import tempfile
 from pathlib import Path
 import shutil
@@ -27,6 +28,12 @@ def parse_args():
 
 def run_evaluate(args):
     identifier = 'eval---' + args.dataset_id + '---' + args.vm_id + '---' + args.run_id + '---started-' + str(dt.now().strftime('%Y-%m-%d-%H-%M-%S'))
+    
+    for pipeline_identifer in yield_all_running_pipelines():
+        if pipeline_identifer == identifier.split('---started-')[0]:
+            print('A pipeline for identifier "' + pipeline_identifer + '" is already scheduled/running. I do nothing.')
+            return
+    
     db = get_tira_db()
     ensure_repo_is_fresh(args.repo_dir)
     run = db._load_run(args.dataset_id, args.vm_id, args.run_id)
@@ -36,7 +43,6 @@ def run_evaluate(args):
     with tempfile.TemporaryDirectory() as tmpdirname:
         tmpdirname = tmpdirname +'/repo'
         shutil.copytree(args.repo_dir, tmpdirname)
-        print('created temporary directory', tmpdirname)
         job_dir = Path(tmpdirname) / args.dataset_id / args.vm_id / args.run_id
         job_dir.mkdir(parents=True, exist_ok=True)
         
@@ -56,6 +62,7 @@ TIRA_GIT_ID=''' + identifier + '''''')
         repo.index.add([str(Path(args.dataset_id) / args.vm_id / args.run_id / 'job-to-execute.txt')])
         repo.index.commit("Evaluate software")
         repo.remote().push(identifier)
+        print('A new job with identifier "' + identifier + '" is scheduled.')
     
 if __name__ == '__main__':
     args = parse_args()
@@ -64,6 +71,4 @@ if __name__ == '__main__':
         run_evaluate(args)
     else:
         raise ValueError('I can not handle the passed command: ' + str(args))
-    
-    print(args)
 

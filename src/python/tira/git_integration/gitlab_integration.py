@@ -88,11 +88,19 @@ def persist_tira_metadata_for_job(run_dir, run_id, job_name):
         f.write(check_output(['bash', '-c', 'find "' + os.path.join(run_dir, 'output') + '" -type f | wc -l']))
         f.write(check_output(['bash', '-c', 'find "' + os.path.join(run_dir, 'output') + '" -type d | wc -l']))
 
+def yield_all_running_pipelines():
+    gl = gitlab_client()
+    gl_project = gl.projects.get(int(os.environ['CI_PROJECT_ID']))
+    for status in ['scheduled', 'running', 'pending', 'created', 'waiting_for_resource', 'preparing']:
+        for pipeline in gl_project.pipelines.list(status=status):
+            yield (pipeline.ref + '---started-').split( '---started-')[0]
+    
 if __name__ == '__main__':
-    print('#####################################################################')
-    print(job_command('run-user-software') + '\n\n')
-    print(job_trace('run-user-software'))
-    print('\n\n\n#####################################################################')
-    print(job_command('evaluate-software-result') + '\n\n')
-    print(job_trace('evaluate-software-result'))
+    print(list(yield_all_running_pipelines()))
+#    print('#####################################################################')
+#    print(job_command('run-user-software') + '\n\n')
+#    print(job_trace('run-user-software'))
+#    print('\n\n\n#####################################################################')
+#    print(job_command('evaluate-software-result') + '\n\n')
+#    print(job_trace('evaluate-software-result'))
 

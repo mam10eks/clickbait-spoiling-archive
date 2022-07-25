@@ -1,3 +1,8 @@
+# Run evaluator
+
+./tira-git run-evaluate --task_id clickbait-spoiling --vm_id princess-knight --run_id 2022-07-20-12-54-28 --dataset_id clickbait-spoiling-task-01-validation-dataset-2022-08-01
+
+
 # Brainstorming
 
 - run-software

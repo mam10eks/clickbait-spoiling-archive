@@ -16,7 +16,7 @@ ENV PYTHONPATH=/tira/application/src/
 COPY python/tira/git_integration /tira/application/src/tira/git_integration
 COPY django_tira_git /tira/application/src/django_tira_git
 COPY config/config.yml /tira/application/src/config/tira-git-config.yml
-COPY . /repo/src
+COPY . /tira-git/src
 
 ENTRYPOINT bash
 

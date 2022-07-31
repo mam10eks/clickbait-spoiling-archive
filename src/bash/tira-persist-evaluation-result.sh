@@ -14,9 +14,11 @@ if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
     git config user.email "tira-automation@tira.io"
     git config user.name "TIRA Automation"
 
-    mv ${DIR_TO_CHANGE}/job-to-execute.txt ${DIR_TO_CHANGE}/job-executed-on-$(date +'%Y-%m-%d-%I-%M-%S').txt
+   TARGET_FILE="${DIR_TO_CHANGE}/job-executed-on-$(date +'%Y-%m-%d-%I-%M-%S').txt"
+
+    mv ${DIR_TO_CHANGE}/job-to-execute.txt ${TARGET_FILE}
     git rm ${DIR_TO_CHANGE}/job-to-execute.txt
-    git add ${DIR_TO_CHANGE}/executed-job.txt
+    git add ${TARGET_FILE}
     git commit -m "TIRA-Automation: software was executed and evaluated." || echo "No changes to commit"
 
     git push -o ci.skip origin HEAD:$CI_COMMIT_BRANCH

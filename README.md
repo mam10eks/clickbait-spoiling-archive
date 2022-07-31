@@ -1,6 +1,10 @@
 # Run evaluator
 
-./tira-git run-evaluate --task_id clickbait-spoiling --vm_id princess-knight --run_id 2022-07-20-12-54-28 --dataset_id clickbait-spoiling-task-01-validation-dataset-2022-08-01
+./tira-git run-evaluate --task_id clickbait-spoiling --vm_id princess-knight --run_id 2022-07-20-12-54-28 --dataset_id clickbait-spoiling-task-01-validation-dataset-2022-08-01 --transaction_id XXXX
+
+
+
+confirm_run_evaluate: https://github.com/tira-io/tira/blob/7c0027533547d5c1304023b30ea52fd2b7deedab/host/src/tira_host/grpc_client.py#L83
 
 
 # Brainstorming

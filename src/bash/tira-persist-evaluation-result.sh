@@ -49,5 +49,8 @@ python3 -c "from tira.git_integration.gitlab_integration import persist_tira_met
 
 python3 /tira/application/src/tira/git_integration/grpc_wrapper.py --input_run_vm_id ${TIRA_VM_ID} --dataset_id ${TIRA_DATASET_ID} --run_id ${EVAL_RUN_ID} --transaction_id  ${TIRA_EVALUATOR_TRANSACTION_ID}
 
+su root
+chown -R tira:tira ${TIRA_FINAL_EVALUATION_OUTPUT_DIR}
+
 env|grep 'TIRA' >> task.env
 

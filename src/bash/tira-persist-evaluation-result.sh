@@ -16,6 +16,7 @@ if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
 
    TARGET_FILE="${DIR_TO_CHANGE}/job-executed-on-$(date +'%Y-%m-%d-%I-%M-%S').txt"
 
+    echo "mv ${DIR_TO_CHANGE}/job-to-execute.txt ${TARGET_FILE}"
     mv ${DIR_TO_CHANGE}/job-to-execute.txt ${TARGET_FILE}
     git rm ${DIR_TO_CHANGE}/job-to-execute.txt
     git add ${TARGET_FILE}

@@ -38,6 +38,7 @@ if [ -d "${TIRA_FINAL_EVALUATION_OUTPUT_DIR}" ]; then
 fi
 
 mkdir -p "${SRC_DIR}"
+su tira
 mkdir -p "${TIRA_FINAL_EVALUATION_OUTPUT_DIR}"
 
 echo "cp -r ${SRC_DIR} ${TIRA_FINAL_EVALUATION_OUTPUT_DIR}"

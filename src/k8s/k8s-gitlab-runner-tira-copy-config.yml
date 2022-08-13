@@ -26,7 +26,7 @@ runners:
           name = "write-tira-data-runs"
           mount_path = "/mnt/ceph/tira/data/runs/"
           read_only = false
-          host_path = "/mnt/ceph/storage/data-tmp/current/kibi9872/tira-dummy-repository/data/runs/"
+          host_path = "/mnt/ceph/tira/data/runs/"
         [[runners.kubernetes.volumes.secret]]
           name = "tira-git-credentials"
           mount_path = "/etc/tira-git-credentials"

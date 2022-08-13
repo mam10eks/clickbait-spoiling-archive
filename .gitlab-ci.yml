@@ -77,7 +77,6 @@ persist-evaluation-result:
   image: webis/tira-git:0.0.19
   script:
     - tira-persist-evaluation-result.sh
-    - env
   dependencies: 
     - evaluate-software-result
   tags:

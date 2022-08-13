@@ -38,6 +38,9 @@ def copy_resources():
     persist_tira_metadata_for_job(str(run_output_dir() / '..'), os.environ['TIRA_RUN_ID'], 'run-user-software')
 
 def extract_evaluation_commands(evaluator):
+    if 'TIRA_EVALUATION_COMMAND_TO_EXECUTE' in os.environ and 'TIRA_EVALUATOR_TRANSACTION_ID' in os.environ and 'TIRA_EVALUATION_IMAGE_TO_EXECUTE' in os.environ:
+        return {{'TIRA_EVALUATION_IMAGE_TO_EXECUTE': os.environ['TIRA_EVALUATION_IMAGE_TO_EXECUTE'], 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': os.environ['TIRA_EVALUATION_COMMAND_TO_EXECUTE'], 'TIRA_EVALUATION_SOFTWARE_ID': os.environ['TIRA_EVALUATOR_TRANSACTION_ID']}
+
     eval_id = 'TODO-use-real-evaluator-id' #TODO evaluator['evaluatorId']
     try:
         evaluator = json.loads(evaluator['command'])

@@ -1,6 +1,7 @@
-IMAGE_VERSION=0.0.17
+IMAGE_VERSION=0.0.18
 
 build-tira-git-docker:
+	cp -r /home/maik/workspace/tira/host/src/tira_host src
 	docker build -t webis/tira-git:${IMAGE_VERSION} src
 
 publish-tira-git-docker:

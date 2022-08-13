@@ -45,5 +45,7 @@ cp -r ${SRC_DIR} ${TIRA_FINAL_EVALUATION_OUTPUT_DIR}
 EVAL_RUN_ID=$(echo $TIRA_FINAL_EVALUATION_OUTPUT_DIR| awk -F '/' '{print ($NF)}')
 python3 -c "from tira.git_integration.gitlab_integration import persist_tira_metadata_for_job; persist_tira_metadata_for_job('${TIRA_FINAL_EVALUATION_OUTPUT_DIR}', '${EVAL_RUN_ID}', 'evaluate-software-result')"
 
+python3 /tira/application/src/tira/git_integration/grpc_wrapper.py --input_run_vm_id ${TIRA_VM_ID} --dataset_id ${TIRA_DATASET_ID} --run_id ${EVAL_RUN_ID} --transaction_id  ${TIRA_EVALUATOR_TRANSACTION_ID}
+
 env|grep 'TIRA' >> task.env
 

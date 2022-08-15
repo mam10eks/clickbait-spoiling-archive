@@ -1,6 +1,6 @@
 FROM registry.webis.de/code-lib/public-images/tira-application:0.0.12
 
-RUN apk add bash git curl openssh-client tree
+RUN apk add bash git curl openssh-client tree coreutils
 
 RUN pip3 install python-gitlab GitPython
 

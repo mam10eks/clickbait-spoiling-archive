@@ -59,7 +59,7 @@ def run_prototext(run_id, job_name):
     inputRun = os.environ['TIRA_RUN_ID'] if ('evaluate-software-result' == job_name) else 'none'
     software_id = os.environ['TIRA_USER_SOFTWARE_ID'] if ('run-user-software' == job_name) else os.environ['TIRA_EVALUATION_SOFTWARE_ID']
 
-    return '''softwareId: "software''' + str(software_id) + '''"
+    return '''softwareId: "''' + str(software_id) + '''"
 runId: "'''+ run_id + '''"
 inputDataset: "''' + os.environ['TIRA_DATASET_ID'] + '''"
 inputRun: "''' + inputRun + '''"

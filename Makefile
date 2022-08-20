@@ -1,4 +1,4 @@
-IMAGE_VERSION=0.0.28
+IMAGE_VERSION=0.0.29
 
 build-tira-git-docker:
 	cp -r /home/maik/workspace/tira/host/src/tira_host src

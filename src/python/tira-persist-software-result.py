@@ -40,7 +40,7 @@ def copy_resources():
     print('Make target directory: "{target_without_output}"')
     Path(target_without_output).mkdir(parents=True, exist_ok=True)
     
-    shutil.copytree(out_dir, target_without_output)
+    shutil.copytree(src, target_without_output)
     persist_tira_metadata_for_job(str(target), os.environ['TIRA_RUN_ID'], 'run-user-software')
 
 def extract_evaluation_commands(evaluator):

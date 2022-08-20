@@ -23,10 +23,10 @@ if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
     git commit -m "TIRA-Automation: software was executed and evaluated." || echo "No changes to commit"
 
     git push -o ci.skip origin HEAD:$CI_COMMIT_BRANCH
-    
-    git checkout main
+
+    git reset --hard origin/main
     git merge $CI_COMMIT_BRANCH
-    git push origin HEAD:main -o ci.skip
+    git push origin main -o ci.skip
 else
     echo "The file ${DIR_TO_CHANGE}/job-to-execute.txt does not exist, I cant change it."
 fi

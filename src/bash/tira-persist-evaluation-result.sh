@@ -33,8 +33,8 @@ if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
     echo "git reset --hard origin/main"
     git reset --hard origin/main
     
-    echo "git merge $CI_COMMIT_BRANCH"
-    git merge $CI_COMMIT_BRANCH
+    echo "git merge origin/$CI_COMMIT_BRANCH"
+    git merge origin/$CI_COMMIT_BRANCH
     
     echo "git push origin main -o ci.skip"
     git push origin main -o ci.skip

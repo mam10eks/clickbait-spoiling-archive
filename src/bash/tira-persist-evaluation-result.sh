@@ -24,9 +24,11 @@ if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
 
     git push -o ci.skip origin HEAD:$CI_COMMIT_BRANCH
 
+    echo "git fetch origin main"
+    git fetch origin main
+
     echo "git checkout -b main origin/main"
     git checkout -b main origin/main
-    #git fetch origin main
     
     echo "git reset --hard origin/main"
     git reset --hard origin/main

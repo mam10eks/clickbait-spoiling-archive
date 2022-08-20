@@ -43,7 +43,7 @@ def copy_resources():
     print('The output dir exists: ' + str(exists(str(run_output_dir()))))
     
     shutil.copytree(src, str(target))
-    persist_tira_metadata_for_job(str(target), os.environ['TIRA_RUN_ID'], 'run-user-software')
+    persist_tira_metadata_for_job(target_without_output, os.environ['TIRA_RUN_ID'], 'run-user-software')
 
 def extract_evaluation_commands(evaluator):
     if 'TIRA_EVALUATION_COMMAND_TO_EXECUTE' in os.environ and 'TIRA_EVALUATOR_TRANSACTION_ID' in os.environ and 'TIRA_EVALUATION_IMAGE_TO_EXECUTE' in os.environ:

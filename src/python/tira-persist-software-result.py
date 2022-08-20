@@ -29,12 +29,13 @@ def copy_resources():
         print(str(run_output_dir()) + " exists already. I do not overwrite.")
         return
     
-    if not exists(str(os.environ['TIRA_OUTPUT_DIR'])):
-        Path(os.environ['TIRA_OUTPUT_DIR']).mkdir(parents=True, exist_ok=True)
+    out_dir = str(os.path.abspath(Path(os.environ['TIRA_OUTPUT_DIR'] + '/..')))
+    if not exists(out_dir):
+        Path(out_dir).mkdir(parents=True, exist_ok=True)
     
     Path(run_output_dir()).mkdir(parents=True, exist_ok=True)
     
-    shutil.copytree(os.environ['TIRA_OUTPUT_DIR'], str(run_output_dir()))
+    shutil.copytree(out_dir, str(run_output_dir()))
     persist_tira_metadata_for_job(str(run_output_dir() / '..'), os.environ['TIRA_RUN_ID'], 'run-user-software')
 
 def extract_evaluation_commands(evaluator):

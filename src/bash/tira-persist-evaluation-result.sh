@@ -23,6 +23,10 @@ if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
     git commit -m "TIRA-Automation: software was executed and evaluated." || echo "No changes to commit"
 
     git push -o ci.skip origin HEAD:$CI_COMMIT_BRANCH
+    
+    git checkout main
+    git merge $CI_COMMIT_BRANCH
+    git push origin HEAD:main -o ci.skip
 else
     echo "The file ${DIR_TO_CHANGE}/job-to-execute.txt does not exist, I cant change it."
 fi
@@ -53,4 +57,6 @@ chown -R tira:tira ${TIRA_FINAL_EVALUATION_OUTPUT_DIR}
 python3 /tira/application/src/tira/git_integration/grpc_wrapper.py --input_run_vm_id ${TIRA_VM_ID} --dataset_id ${TIRA_DATASET_ID} --run_id ${EVAL_RUN_ID} --transaction_id  ${TIRA_EVALUATOR_TRANSACTION_ID}
 
 env|grep 'TIRA' >> task.env
+
+python3 -c 'from tira.git_integration.gitlab_integration import delete_branch_of_repository; delete_branch_of_repository()'
 

@@ -94,7 +94,14 @@ def yield_all_running_pipelines():
     for status in ['scheduled', 'running', 'pending', 'created', 'waiting_for_resource', 'preparing']:
         for pipeline in gl_project.pipelines.list(status=status):
             yield (pipeline.ref + '---started-').split( '---started-')[0]
-    
+
+
+def delete_branch_of_repository():
+    gl = gitlab_client()
+    gl_project = gl.projects.get(int(os.environ['CI_PROJECT_ID']))
+    gl_project.branches.delete(os.environ['TIRA_GIT_ID'])
+
+
 if __name__ == '__main__':
     print(list(yield_all_running_pipelines()))
 #    print('#####################################################################')

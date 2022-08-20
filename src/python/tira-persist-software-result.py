@@ -31,6 +31,7 @@ def copy_resources():
     
     out_dir = str(os.path.abspath(Path(os.environ['TIRA_OUTPUT_DIR'] + '/..')))
     if not exists(out_dir):
+        print(f'Make output_dir: "{out_dir}"')
         Path(out_dir).mkdir(parents=True, exist_ok=True)
     
     Path(run_output_dir()).mkdir(parents=True, exist_ok=True)

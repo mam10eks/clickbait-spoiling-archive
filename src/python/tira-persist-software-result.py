@@ -37,8 +37,10 @@ def copy_resources():
         print(f'Make src-directory: "{src}"')
         Path(src).mkdir(parents=True, exist_ok=True)
     
-    print('Make target directory: "{target_without_output}"')
+    print(f'Make target directory: "{target_without_output}"')
     Path(target_without_output).mkdir(parents=True, exist_ok=True)
+    
+    print('The output dir exists: ' + str(exists(str(run_output_dir()))))
     
     shutil.copytree(src, target_without_output)
     persist_tira_metadata_for_job(str(target), os.environ['TIRA_RUN_ID'], 'run-user-software')

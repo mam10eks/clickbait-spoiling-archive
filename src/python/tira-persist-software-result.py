@@ -28,16 +28,20 @@ def copy_resources():
     if exists(str(run_output_dir())):
         print(str(run_output_dir()) + " exists already. I do not overwrite.")
         return
+
+    src = str(os.environ['TIRA_OUTPUT_DIR'])
+    target = run_output_dir()
+    target_without_output = str(os.path.abspath(target / '..'))
     
-    out_dir = str(os.path.abspath(Path(os.environ['TIRA_OUTPUT_DIR'] + '/..')))
-    if not exists(out_dir):
-        print(f'Make output_dir: "{out_dir}"')
-        Path(out_dir).mkdir(parents=True, exist_ok=True)
+    if not exists(src):
+        print(f'Make src-directory: "{src}"')
+        Path(src).mkdir(parents=True, exist_ok=True)
     
-    Path(run_output_dir()).mkdir(parents=True, exist_ok=True)
+    print('Make target directory: "{target_without_output}"')
+    Path(target_without_output).mkdir(parents=True, exist_ok=True)
     
-    shutil.copytree(out_dir, str(run_output_dir()))
-    persist_tira_metadata_for_job(str(run_output_dir() / '..'), os.environ['TIRA_RUN_ID'], 'run-user-software')
+    shutil.copytree(out_dir, target_without_output)
+    persist_tira_metadata_for_job(str(target), os.environ['TIRA_RUN_ID'], 'run-user-software')
 
 def extract_evaluation_commands(evaluator):
     if 'TIRA_EVALUATION_COMMAND_TO_EXECUTE' in os.environ and 'TIRA_EVALUATOR_TRANSACTION_ID' in os.environ and 'TIRA_EVALUATION_IMAGE_TO_EXECUTE' in os.environ:

@@ -24,8 +24,17 @@ if [ -f "${DIR_TO_CHANGE}/job-to-execute.txt" ]; then
 
     git push -o ci.skip origin HEAD:$CI_COMMIT_BRANCH
 
+    echo "git checkout -b main origin/main"
+    git checkout -b main origin/main
+    #git fetch origin main
+    
+    echo "git reset --hard origin/main"
     git reset --hard origin/main
+    
+    echo "git merge $CI_COMMIT_BRANCH"
     git merge $CI_COMMIT_BRANCH
+    
+    echo "git push origin main -o ci.skip"
     git push origin main -o ci.skip
 else
     echo "The file ${DIR_TO_CHANGE}/job-to-execute.txt does not exist, I cant change it."

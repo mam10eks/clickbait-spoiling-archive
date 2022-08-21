@@ -1,0 +1,12 @@
+TIRA_IMAGE_TO_EXECUTE=registry.webis.de/code-research/tira/tira-user-princess-knight/my-software:0.0.1-tira-docker-software-id-nimble-groove
+TIRA_VM_ID=princess-knight
+TIRA_COMMAND_TO_EXECUTE=echo "my final test number 4"
+TIRA_SOFTWARE_ID=docker-software-3
+TIRA_DATASET_ID=del-me-20220813-training
+TIRA_RUN_ID=2022-08-21-22-47-59
+TIRA_TASK_ID=clickbait-spoiling
+TIRA_EVALUATOR_TRANSACTION_ID=b1574f89-8035-46cb-8188-c65a7497dcdd
+TIRA_GIT_ID=eval---del-me-20220813-training---princess-knight---2022-08-21-22-47-59---started-2022-08-21-22-47-59
+TIRA_EVALUATION_IMAGE_TO_EXECUTE=webis/pan-clickbait-spoiling-evaluator:0.0.1
+TIRA_EVALUATION_COMMAND_TO_EXECUTE=bash -c '/clickbait-spoiling-eval.py --task 1 --input_run $inputRun --output_prototext $outputDir/evaluation.prototext'
+TIRA_EVALUATION_SOFTWARE_ID=del-me-20220813-training-evaluator

@@ -12,6 +12,12 @@ def confirm_run_eval(args):
     print(client.confirm_run_eval(vm_id=args.input_run_vm_id, dataset_id=args.dataset_id, run_id=args.run_id, transaction_id=args.transaction_id))
 
 
+def confirm_run_execute(args):
+    client = grpc_client(args)
+
+    print(client.confirm_run_execute(vm_id=args.input_run_vm_id, dataset_id=args.dataset_id, run_id=args.run_id, transaction_id=args.transaction_id))
+
+
 def parse_args():
     import argparse
 
@@ -23,13 +29,19 @@ def parse_args():
     parser.add_argument('--dataset_id', type=str, required=True)
     parser.add_argument('--run_id', type=str, required=True)
     parser.add_argument('--transaction_id', type=str, required=True)
+    
+    parser.add_argument('--task', type=str, choices=['confirm-run-eval', 'confirm-run-execute'], default=None, required=True)
 
     return parser.parse_args()
 
 
 if __name__ == '__main__':
     args = parse_args()
-    confirm_run_eval(args)
+    
+    if args.task == 'confirm-run-eval':
+        confirm_run_eval(args)
+    elif args.task == 'confirm-run-execute':
+        confirm_run_execute(args)
 
-    # example python3 /tira/application/src/tira/git_integration/grpc_wrapper.py
+    # docker run --net=host --rm -ti webis/tira-git:0.0.39 example python3 /tira/application/src/tira/git_integration/grpc_wrapper.py --input_run_vm_id princess-knight --dataset_id del-me-20220813-training --run_id 2022-08-20-13-36-23 --transaction_id 1 --task confirm-run-execute --tira_application_host 127.0.0.1 --tira_application_grpc_port 50052
 

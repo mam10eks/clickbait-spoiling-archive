@@ -25,6 +25,7 @@ prepare-tira-environment:
     name: webis/tira-git:0.0.40
     pull_policy: if-not-present
   artifacts:
+    untracked: true
     reports:
       dotenv: task.env
   variables:

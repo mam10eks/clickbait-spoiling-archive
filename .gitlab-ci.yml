@@ -31,12 +31,12 @@ run-user-software:
   image:
     name: "${TIRA_IMAGE_TO_EXECUTE}"
     pull_policy: if-not-present
-  timeout: 3 hours
+  timeout: "${TIRA_TIMEOUT_IN_HOURS} hours"
   variables:
-   KUBERNETES_CPU_REQUEST: 3
-   KUBERNETES_CPU_LIMIT: 3
-   KUBERNETES_MEMORY_REQUEST: 2Gi
-   KUBERNETES_MEMORY_LIMIT: 2Gi
+   KUBERNETES_CPU_REQUEST: ${TIRA_CPU_COUNT}
+   KUBERNETES_CPU_LIMIT: ${TIRA_CPU_COUNT}
+   KUBERNETES_MEMORY_REQUEST: "${TIRA_MEMORY_IN_GIBIBYTE} Gi"
+   KUBERNETES_MEMORY_LIMIT: "${TIRA_MEMORY_IN_GIBIBYTE} Gi"
   script:
     - test -n "${TIRA_OUTPUT_DIR}" && mkdir -p ${TIRA_OUTPUT_DIR}
     - echo "${TIRA_COMMAND_TO_EXECUTE}"

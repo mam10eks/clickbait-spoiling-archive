@@ -16,7 +16,8 @@ clone-repository:
   script:
     - echo "Repository is cloned"
   tags:
-    - read-tira-data
+    # We need internet access.
+    - write-tira-data
 
 prepare-tira-environment:
   stage: Preparation

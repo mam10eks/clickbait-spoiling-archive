@@ -1,9 +1,20 @@
 stages:
+  - Clone
   - Preparation
   - Run Software
   - Persist Software Result
   - Evaluate Software Result
   - Persist Evaluation Result
+
+clone-repository:
+  stage: Clone
+  image:
+    name: webis/tira-git:0.0.40
+    pull_policy: if-not-present
+  variables:
+    GIT_STRATEGY: clone
+  script:
+    - echo "Repository is cloned"
 
 prepare-tira-environment:
   stage: Preparation
@@ -13,6 +24,8 @@ prepare-tira-environment:
   artifacts:
     reports:
       dotenv: task.env
+  variables:
+    GIT_STRATEGY: none
   script:
     - tira-test-runner-is-trustworthy.sh
     - tira-specify-task-to-run.py > task.env
@@ -31,6 +44,8 @@ run-user-software:
   image:
     name: "${TIRA_IMAGE_TO_EXECUTE}"
     pull_policy: if-not-present
+  variables:
+    GIT_STRATEGY: none
   script:
     - test -n "${TIRA_OUTPUT_DIR}" && mkdir -p ${TIRA_OUTPUT_DIR}
     - echo "${TIRA_COMMAND_TO_EXECUTE}"
@@ -49,6 +64,8 @@ persist-software-result:
     untracked: true
     reports:
       dotenv: task.env
+  variables:
+    GIT_STRATEGY: clone
   script:
     - tira-persist-software-result.py
   dependencies: 
@@ -58,7 +75,7 @@ persist-software-result:
 
 evaluate-software-result:
   stage: Evaluate Software Result
-  dependencies: 
+  dependencies:
     - persist-software-result
   artifacts:
     untracked: true
@@ -67,6 +84,8 @@ evaluate-software-result:
   image:
     name: "${TIRA_EVALUATION_IMAGE_TO_EXECUTE}"
     pull_policy: if-not-present
+  variables:
+    GIT_STRATEGY: none
   script:
     - test -n "${TIRA_EVALUATION_OUTPUT_DIR}" && mkdir -p ${TIRA_EVALUATION_OUTPUT_DIR}
     - echo "${TIRA_EVALUATION_COMMAND_TO_EXECUTE}"
@@ -82,6 +101,8 @@ persist-evaluation-result:
   image:
     name: webis/tira-git:0.0.40
     pull_policy: if-not-present
+  variables:
+    GIT_STRATEGY: none
   script:
     - tira-persist-evaluation-result.sh
   dependencies: 

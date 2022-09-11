@@ -10,6 +10,7 @@ prepare-tira-environment:
   image:
     name: webis/tira-git:0.0.40
     pull_policy: if-not-present
+  artifacts:
     reports:
       dotenv: task.env
   script:
@@ -30,6 +31,12 @@ run-user-software:
   image:
     name: "${TIRA_IMAGE_TO_EXECUTE}"
     pull_policy: if-not-present
+  timeout: 3 hours
+  variables:
+   KUBERNETES_CPU_REQUEST: 3
+   KUBERNETES_CPU_LIMIT: 3
+   KUBERNETES_MEMORY_REQUEST: 2Gi
+   KUBERNETES_MEMORY_LIMIT: 2Gi
   script:
     - test -n "${TIRA_OUTPUT_DIR}" && mkdir -p ${TIRA_OUTPUT_DIR}
     - echo "${TIRA_COMMAND_TO_EXECUTE}"

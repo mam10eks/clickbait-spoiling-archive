@@ -31,7 +31,7 @@ run-user-software:
   image:
     name: "${TIRA_IMAGE_TO_EXECUTE}"
     pull_policy: if-not-present
-  timeout: "${TIRA_TIMEOUT_IN_HOURS} hours"
+  timeout: "24 hours"
   variables:
    KUBERNETES_CPU_REQUEST: ${TIRA_CPU_COUNT}
    KUBERNETES_CPU_LIMIT: ${TIRA_CPU_COUNT}

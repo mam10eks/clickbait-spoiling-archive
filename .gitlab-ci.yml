@@ -18,7 +18,7 @@ prepare-tira-environment:
     - tira-specify-task-to-run.py > task.env
     - cat task.env
   tags:
-    - no-internet
+    - tira-evaluator
 
 run-user-software:
   stage: Run Software
@@ -31,7 +31,7 @@ run-user-software:
   image:
     name: "${TIRA_IMAGE_TO_EXECUTE}"
     pull_policy: if-not-present
-  timeout: "${TIRA_TIMEOUT_IN_HOURS} hours"
+  timeout: "24 hours"
   variables:
    KUBERNETES_CPU_REQUEST: ${TIRA_CPU_COUNT}
    KUBERNETES_CPU_LIMIT: ${TIRA_CPU_COUNT}
@@ -44,7 +44,7 @@ run-user-software:
     - env|grep 'TIRA' > task.env
   allow_failure: true
   tags:
-    - no-internet
+    - tira-user-software-runner
 
 persist-software-result:
   stage: Persist Software Result
@@ -80,8 +80,7 @@ evaluate-software-result:
     - env|grep 'TIRA' > task.env
   allow_failure: true
   tags:
-    - no-internet
-    - read-tira-data
+    - tira-evaluator
 
 persist-evaluation-result:
   stage: Persist Evaluation Result

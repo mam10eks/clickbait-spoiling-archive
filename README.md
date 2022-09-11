@@ -41,43 +41,9 @@ The TIRA protocoll implemented in standard git workflows.
 
 # Setup
 
-https://docs.gitlab.com/runner/install/kubernetes.html
+Webis specific kubernetes installation in https://git.webis.de/code-generic/code-admin-knowledge-base/-/tree/master/services/tira/tira-gitlab
 
-For some tests, I use my own namespace: `kibi9872`.
-Disable shared group runners for the project, we want that everything runs via our own runners.
-
-Create service account for TIRA, used by the runner to create pods.
-
-```
-kubectl -n kibi9872 apply -f k8s-tira-service-account.yml
-kubectl -n kibi9872 apply -f k8s-no-internet-network-policy.yml
-```
-
-Create the `tira-git-credentials` secret so that the corresponding pods can have access to the git secrets (create a git token for the group).
-
-```
-./k8s-deploy-tira-git-credentials-as-secret.sh <TOKEN-FOR-THE-GROUP>
-```
-
-
-To start from scratch, run:
-
-```
-helm uninstall --namespace kibi9872 gitlab-runner-tira-evaluators; \
-helm uninstall --namespace kibi9872 gitlab-runner-tira-user-software; \
-helm uninstall --namespace kibi9872 gitlab-runner-tira-copy
-```
-
-Then, install the runners:
-
-```
-helm install --namespace kibi9872 gitlab-runner-tira-evaluators -f ./src/k8s/k8s-gitlab-runner-tira-evaluators-config.yml gitlab/gitlab-runner; \
-helm install --namespace kibi9872 gitlab-runner-tira-user-software -f ./src/k8s/k8s-gitlab-runner-tira-user-software-config.yml gitlab/gitlab-runner; \
-helm install --namespace kibi9872 gitlab-runner-tira-copy -f ./src/k8s/k8s-gitlab-runner-tira-copy-config.yml gitlab/gitlab-runner
-```
-
-After this command, the runner should be available in  "Settings" -> "CI/CD Settings" -> "Runners" -> "Specific runners" section.
-
+# Old
 
 Create directory to execute, e.g., `scai-qrecc22-dataset-20220607-training/hal9000-default/2022-06-28-21-03-37/job-to-execute.txt`:
 

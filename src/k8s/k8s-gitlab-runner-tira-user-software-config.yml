@@ -12,23 +12,11 @@ rbac:
 runners:
   name: gitlab-runner-tira-user-software
   Description: Run user software on proprietary data while ensuring that nothing can be leaked.
-  tags: no-internet,read-tira-data-datasets
+  tags: no-internet
   config: |
     [[runners]]
       [runners.kubernetes]
         image = "ubuntu:16.04"
         [runners.kubernetes.pod_labels]
           role = "no-internet"
-        [[runners.kubernetes.host_aliases]]
-          ip = "141.54.132.157"
-          hostnames = ["git.webis.de"]
-        [[runners.kubernetes.volumes.host_path]]
-          name = "read-tira-data-datasets-test-datasets"
-          mount_path = "/mnt/ceph/tira/data/datasets/test-datasets/"
-          read_only = true
-          host_path = "/mnt/ceph/tira/data/datasets/test-datasets/"
-        [[runners.kubernetes.volumes.host_path]]
-          name = "read-tira-data-datasets-training-datasets"
-          mount_path = "/mnt/ceph/tira/data/datasets/training-datasets/"
-          read_only = true
-          host_path = "/mnt/ceph/tira/data/datasets/training-datasets/"
+

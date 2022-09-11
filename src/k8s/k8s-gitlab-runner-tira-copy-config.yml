@@ -12,7 +12,7 @@ rbac:
 runners:
   name: gitlab-gitlab-runner-tira-copy
   Description: Copy runs from user software or evaluators to TIRA.
-  tags: write-tira-data-runs,tira-git-credentials
+  tags: write-tira-data
   config: |
     [[runners]]
       [runners.kubernetes]

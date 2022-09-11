@@ -39,7 +39,6 @@ run-user-software:
   allow_failure: true
   tags:
     - no-internet
-    - read-tira-data-datasets
 
 persist-software-result:
   stage: Persist Software Result
@@ -55,8 +54,7 @@ persist-software-result:
   dependencies: 
     - run-user-software
   tags:
-    - write-tira-data-runs
-    - tira-git-credentials
+    - write-tira-data
 
 evaluate-software-result:
   stage: Evaluate Software Result
@@ -77,8 +75,7 @@ evaluate-software-result:
   allow_failure: true
   tags:
     - no-internet
-    - read-tira-data-datasets-truth
-    - read-tira-data-runs
+    - read-tira-data
 
 persist-evaluation-result:
   stage: Persist Evaluation Result
@@ -90,6 +87,5 @@ persist-evaluation-result:
   dependencies: 
     - evaluate-software-result
   tags:
-    - write-tira-data-runs
-    - tira-git-credentials
+    - write-tira-data
 

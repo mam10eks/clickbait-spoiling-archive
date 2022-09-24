@@ -75,7 +75,7 @@ def identify_environment_variables():
     eval_id = dt.now().strftime('%Y-%m-%d-%H-%M-%S')
     ret = set()
     for (k,v) in os.environ.items() :
-        if k.lower().startswith('tira'):
+        if k.lower().startswith('tira') and k.upper() not in ['TIRA_EVALUATION_INPUT_DIR', 'TIRA_EVALUATION_OUTPUT_DIR', 'TIRA_FINAL_EVALUATION_OUTPUT_DIR', 'TIRA_EVALUATION_IMAGE_TO_EXECUTE', 'TIRA_EVALUATION_COMMAND_TO_EXECUTE', 'TIRA_EVALUATION_SOFTWARE_ID']:
             ret.add((k + '=' + v).strip())
     
     

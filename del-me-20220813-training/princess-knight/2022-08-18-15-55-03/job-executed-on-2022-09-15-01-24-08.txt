@@ -1,0 +1,14 @@
+TIRA_IMAGE_TO_EXECUTE=ubuntu:18.04
+TIRA_VM_ID=princess-knight
+TIRA_COMMAND_TO_EXECUTE=echo 'No software to execute. Only evaluation'
+TIRA_SOFTWARE_ID=-1
+TIRA_DATASET_ID=del-me-20220813-training
+TIRA_RUN_ID=2022-08-18-15-55-03
+TIRA_CPU_COUNT=2
+TIRA_MEMORY_IN_GIBIBYTE=10
+TIRA_TASK_ID=clickbait-spoiling
+TIRA_EVALUATOR_TRANSACTION_ID=50043eb7-0f08-4ecd-a9cc-1aac876b27e8
+TIRA_GIT_ID=eval---del-me-20220813-training---princess-knight---2022-08-18-15-55-03---started-2022-09-15-14-46-26
+TIRA_EVALUATION_IMAGE_TO_EXECUTE=webis/pan-clickbait-spoiling-evaluator:0.0.1
+TIRA_EVALUATION_COMMAND_TO_EXECUTE=bash -c '/clickbait-spoiling-eval.py --task 1 --input_run $inputRun --output_prototext $outputDir/evaluation.prototext'
+TIRA_EVALUATION_SOFTWARE_ID=del-me-20220813-training-evaluator

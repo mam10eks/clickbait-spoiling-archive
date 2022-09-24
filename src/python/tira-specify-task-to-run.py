@@ -59,7 +59,7 @@ def identify_environment_variables(job_file):
 
     if exists(absolute_input_dataset) and not exists(input_dataset):
         print(f'Copy input data from {absolute_input_dataset} to {os.path.abspath(Path(input_dataset) / "..")}', file=sys.stderr)
-        shutil.copytree(absolute_input_dataset, os.path.abspath(Path(input_dataset) / '..'))
+        shutil.copytree(absolute_input_dataset, os.path.abspath(Path(input_dataset)))
     else:
         print(f'Absolute input dataset {absolute_input_dataset} exists: {exists(absolute_input_dataset)}', file=sys.stderr)
         print(f'Relative input dataset {input_dataset} exists: {exists(input_dataset)}', file=sys.stderr)

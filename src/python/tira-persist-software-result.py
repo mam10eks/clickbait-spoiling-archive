@@ -69,7 +69,7 @@ def identify_environment_variables():
     input_dataset = absolute_input_dataset.split('/mnt/ceph/tira/data/datasets/')[1]
     if exists(absolute_input_dataset) and not exists(input_dataset):
         print(f'Copy ground truth data from {absolute_input_dataset} to {os.path.abspath(Path(input_dataset) / "..")}')
-        shutil.copytree(absolute_input_dataset, os.path.abspath(Path(input_dataset) / '..'))
+        shutil.copytree(absolute_input_dataset, os.path.abspath(Path(input_dataset)))
     
     if not exists(input_dataset):
         print(f'Make empty ground truth directory: "{input_dataset}"')

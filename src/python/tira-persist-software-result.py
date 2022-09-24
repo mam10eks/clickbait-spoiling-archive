@@ -70,6 +70,17 @@ def extract_evaluation_commands(evaluator):
     except:
         return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': 'ubuntu:16.04', 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': 'echo "No evaluation specified..."', 'TIRA_EVALUATION_SOFTWARE_ID': '-1'}
 
+def copy_to_local(absolute_src, relative_target):
+    if exists(absolute_src) and not exists(relative_target):
+        print(f'Copy ground data from {absolute_input_dataset} to {os.path.abspath(Path(input_dataset))}')
+        shutil.copytree(absolute_src, os.path.abspath(Path(relative_target)))
+    
+    if not exists(relative_target):
+        print(f'Make empty ground directory: "{input_dataset}"')
+        Path(relative_target).mkdir(parents=True, exist_ok=True)
+    
+    json.dump({'keep': True}, open(relative_target + '/.keep', 'w'))
+
 def identify_environment_variables():
     db = get_tira_db()
     eval_id = dt.now().strftime('%Y-%m-%d-%H-%M-%S')
@@ -77,23 +88,15 @@ def identify_environment_variables():
     for (k,v) in os.environ.items() :
         if k.lower().startswith('tira') and k.upper() not in ['TIRA_EVALUATION_INPUT_DIR', 'TIRA_EVALUATION_OUTPUT_DIR', 'TIRA_FINAL_EVALUATION_OUTPUT_DIR', 'TIRA_EVALUATION_IMAGE_TO_EXECUTE', 'TIRA_EVALUATION_COMMAND_TO_EXECUTE', 'TIRA_EVALUATION_SOFTWARE_ID']:
             ret.add((k + '=' + v).strip())
-    
-    
+
     absolute_input_dataset = os.environ['TIRA_EVALUATION_GROUND_TRUTH']
     input_dataset = absolute_input_dataset.split('/mnt/ceph/tira/data/datasets/')[1]
-    if exists(absolute_input_dataset) and not exists(input_dataset):
-        print(f'Copy ground truth data from {absolute_input_dataset} to {os.path.abspath(Path(input_dataset) / "..")}')
-        shutil.copytree(absolute_input_dataset, os.path.abspath(Path(input_dataset)))
-    
-    if not exists(input_dataset):
-        print(f'Make empty ground truth directory: "{input_dataset}"')
-        Path(input_dataset).mkdir(parents=True, exist_ok=True)
-    
-    json.dump({'keep': True}, open(input_dataset + '/.keep', 'w'))
+    copy_to_local(absolute_input_dataset, input_dataset)
+    copy_to_local(str(run_output_dir(), 'local-copy-of-input-run'), 
     
     evaluator = extract_evaluation_commands(db.get_evaluator(os.environ['TIRA_DATASET_ID'], os.environ['TIRA_TASK_ID']))
-    ret.add('TIRA_EVALUATION_INPUT_DIR=' + str(run_output_dir()))
-    ret.add('inputRun=' + str(run_output_dir()))
+    ret.add('TIRA_EVALUATION_INPUT_DIR=local-copy-of-input-run')
+    ret.add('inputRun=local-copy-of-input-run')
     ret.add('TIRA_EVALUATION_OUTPUT_DIR=' + str(eval_dir(eval_id) / 'output'))
     ret.add('TIRA_FINAL_EVALUATION_OUTPUT_DIR=' + str(final_eval_dir(eval_id)))
     ret.add('inputDataset=' + input_dataset)

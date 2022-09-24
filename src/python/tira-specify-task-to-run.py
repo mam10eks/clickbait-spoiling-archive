@@ -14,7 +14,7 @@ def config(job_file):
         for l in f:
             l = l.split('=')
             if len(l) == 2:
-                ret[l[0].strip()] = ret[l[1].strip()]
+                ret[l[0].strip()] = l[1].strip()
     
     return ret
 

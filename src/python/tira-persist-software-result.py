@@ -92,7 +92,7 @@ def identify_environment_variables():
     absolute_input_dataset = os.environ['TIRA_EVALUATION_GROUND_TRUTH']
     input_dataset = absolute_input_dataset.split('/mnt/ceph/tira/data/datasets/')[1]
     copy_to_local(absolute_input_dataset, input_dataset)
-    copy_to_local(str(run_output_dir(), 'local-copy-of-input-run'), 
+    copy_to_local(str(run_output_dir()), 'local-copy-of-input-run')
     
     evaluator = extract_evaluation_commands(db.get_evaluator(os.environ['TIRA_DATASET_ID'], os.environ['TIRA_TASK_ID']))
     ret.add('TIRA_EVALUATION_INPUT_DIR=local-copy-of-input-run')

@@ -75,7 +75,7 @@ def identify_environment_variables():
         print(f'Make empty ground truth directory: "{input_dataset}"')
         Path(input_dataset).mkdir(parents=True, exist_ok=True)
     
-    json.dump({'keep': True}, open(input_dataset + '/.keep')
+    json.dump({'keep': True}, open(input_dataset + '/.keep', 'w'))
     
     evaluator = extract_evaluation_commands(db.get_evaluator(os.environ['TIRA_DATASET_ID'], os.environ['TIRA_TASK_ID']))
     ret.add('TIRA_EVALUATION_INPUT_DIR=' + str(run_output_dir()))

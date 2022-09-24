@@ -64,7 +64,7 @@ def identify_environment_variables(job_file):
         print(f'Make input-directory: "{input_dataset}"')
         Path(input_dataset).mkdir(parents=True, exist_ok=True)
     
-    json.dump({'keep': True}, open(input_dataset + '/.keep')
+    json.dump({'keep': True}, open(input_dataset + '/.keep', 'w'))
     
     return ret
 

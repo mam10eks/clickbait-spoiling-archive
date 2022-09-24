@@ -28,9 +28,9 @@ def identify_environment_variables(job_file):
     tira_vm_id = job_dir.split('/')[-2]
     tira_run_id = job_dir.split('/')[-1]
 
-    input_dataset = config('TIRA_DATASET_TYPE') + '-datasets/' + config('TIRA_TASK_ID') + '/' + tira_dataset_id + '/'
+    input_dataset = config(job_file)['TIRA_DATASET_TYPE'] + '-datasets/' + config(job_file)['TIRA_TASK_ID'] + '/' + tira_dataset_id + '/'
     absolute_input_dataset = '/mnt/ceph/tira/data/datasets/' + input_dataset
-    input_dataset_truth = config('TIRA_DATASET_TYPE') + '-datasets-truth/' + config('TIRA_TASK_ID') + '/' + tira_dataset_id + '/'
+    input_dataset_truth = config(job_file)['TIRA_DATASET_TYPE'] + '-datasets-truth/' + config(job_file)['TIRA_TASK_ID'] + '/' + tira_dataset_id + '/'
     
     ret = [
         'TIRA_INPUT_RUN=' + absolute_input_dataset,

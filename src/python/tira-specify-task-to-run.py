@@ -46,6 +46,7 @@ def identify_environment_variables(job_file):
         'TIRA_VM_ID=' + tira_vm_id,
         'TIRA_RUN_ID=' + tira_run_id,
         'TIRA_OUTPUT_DIR=' + job_dir + '/output',
+        'TIRA_JOB_FILE=' + job_file,
     ]
     
     with open(job_file, 'r') as f:

@@ -45,7 +45,21 @@ def copy_resources():
     shutil.copytree(src, str(target))
     persist_tira_metadata_for_job(target_without_output, os.environ['TIRA_RUN_ID'], 'run-user-software')
 
+def config(job_file):
+    ret = {}
+    with open(job_file, 'r') as f:
+        for l in f:
+            l = l.split('=')
+            if len(l) == 2:
+                ret[l[0].strip()] = l[1].strip()
+    
+    return ret
+
 def extract_evaluation_commands(evaluator):
+    if 'TIRA_JOB_FILE' in os.environ:
+        c = config(os.environ['TIRA_JOB_FILE'])
+        return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': c['TIRA_EVALUATION_IMAGE_TO_EXECUTE'], 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': c['TIRA_EVALUATION_COMMAND_TO_EXECUTE'], 'TIRA_EVALUATION_SOFTWARE_ID': os.environ['TIRA_EVALUATION_SOFTWARE_ID']}
+        
     if 'TIRA_EVALUATION_COMMAND_TO_EXECUTE' in os.environ and 'TIRA_EVALUATOR_TRANSACTION_ID' in os.environ and 'TIRA_EVALUATION_IMAGE_TO_EXECUTE' in os.environ:
         return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': os.environ['TIRA_EVALUATION_IMAGE_TO_EXECUTE'], 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': os.environ['TIRA_EVALUATION_COMMAND_TO_EXECUTE'], 'TIRA_EVALUATION_SOFTWARE_ID': os.environ['TIRA_EVALUATION_SOFTWARE_ID']}
 

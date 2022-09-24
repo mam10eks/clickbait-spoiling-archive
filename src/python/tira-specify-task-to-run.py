@@ -39,6 +39,7 @@ def identify_environment_variables(job_file):
         'TIRA_DATASET_ID=' + tira_dataset_id,
         'TIRA_INPUT_DATASET=' + input_dataset,
         'inputDataset=' + input_dataset,
+        'outputDir=' + job_dir + '/output',
         'TIRA_EVALUATION_GROUND_TRUTH=' + input_dataset_truth,
         'TIRA_VM_ID=' + tira_vm_id,
         'TIRA_RUN_ID=' + tira_run_id,

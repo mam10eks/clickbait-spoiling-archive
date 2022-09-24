@@ -1,0 +1,15 @@
+TIRA_IMAGE_TO_EXECUTE=registry.webis.de/code-research/tira/tira-user-princess-knight/my-software:0.0.1-tira-docker-software-id-isomorphic-burger
+TIRA_VM_ID=princess-knight
+TIRA_COMMAND_TO_EXECUTE=cat $inputDataset/input.jsonl > $outputDir/run.jsonl
+TIRA_SOFTWARE_ID=docker-software-11
+TIRA_DATASET_ID=del-me-20220813-training
+TIRA_RUN_ID=2022-09-24-14-00-03
+TIRA_CPU_COUNT=2
+TIRA_MEMORY_IN_GIBIBYTE=10
+TIRA_DATASET_TYPE=training
+TIRA_TASK_ID=clickbait-spoiling
+TIRA_EVALUATOR_TRANSACTION_ID=636bf6fc-fc09-4086-8b24-f344104a8a97
+TIRA_GIT_ID=eval---del-me-20220813-training---princess-knight---2022-09-24-14-00-03---started-2022-09-24-14-00-03
+TIRA_EVALUATION_IMAGE_TO_EXECUTE=webis/pan-clickbait-spoiling-evaluator:0.0.1
+TIRA_EVALUATION_COMMAND_TO_EXECUTE=bash -c '/clickbait-spoiling-eval.py --task 1 --input_run $inputRun --output_prototext $outputDir/evaluation.prototext'
+TIRA_EVALUATION_SOFTWARE_ID=del-me-20220813-training-evaluator

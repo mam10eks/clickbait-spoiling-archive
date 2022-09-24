@@ -72,11 +72,11 @@ def extract_evaluation_commands(evaluator):
 
 def copy_to_local(absolute_src, relative_target):
     if exists(absolute_src) and not exists(relative_target):
-        print(f'Copy ground data from {absolute_input_dataset} to {os.path.abspath(Path(input_dataset))}')
+        print(f'Copy ground data from {absolute_src} to {os.path.abspath(Path(relative_target))}')
         shutil.copytree(absolute_src, os.path.abspath(Path(relative_target)))
     
     if not exists(relative_target):
-        print(f'Make empty ground directory: "{input_dataset}"')
+        print(f'Make empty ground directory: "{relative_target}"')
         Path(relative_target).mkdir(parents=True, exist_ok=True)
     
     json.dump({'keep': True}, open(relative_target + '/.keep', 'w'))

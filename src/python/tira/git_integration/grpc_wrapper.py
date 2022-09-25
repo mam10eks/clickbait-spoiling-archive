@@ -43,5 +43,5 @@ if __name__ == '__main__':
     elif args.task == 'confirm-run-execute':
         confirm_run_execute(args)
 
-    # docker run --net=host --rm -ti webis/tira-git:0.0.39 example python3 /tira/application/src/tira/git_integration/grpc_wrapper.py --input_run_vm_id princess-knight --dataset_id del-me-20220813-training --run_id 2022-08-20-13-36-23 --transaction_id 1 --task confirm-run-execute --tira_application_host 127.0.0.1 --tira_application_grpc_port 50052
+    # docker run --net=host --rm -ti webis/tira-git:0.0.56 example python3 /tira/application/src/tira/git_integration/grpc_wrapper.py --input_run_vm_id princess-knight --dataset_id del-me-20220813-training --run_id 2022-08-20-13-36-23 --transaction_id 1 --task confirm-run-execute --tira_application_host 127.0.0.1 --tira_application_grpc_port 50052
 

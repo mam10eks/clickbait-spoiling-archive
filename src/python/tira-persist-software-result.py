@@ -4,7 +4,6 @@ from datetime import datetime as dt
 from pathlib import Path
 from os.path import exists
 import json
-from tira.git_integration import get_tira_db
 import os
 from django.conf import settings
 import shutil
@@ -55,7 +54,7 @@ def config(job_file):
     
     return ret
 
-def extract_evaluation_commands(evaluator):
+def extract_evaluation_commands():
     if 'TIRA_JOB_FILE' in os.environ:
         c = config(os.environ['TIRA_JOB_FILE'])
         return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': c['TIRA_EVALUATION_IMAGE_TO_EXECUTE'], 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': c['TIRA_EVALUATION_COMMAND_TO_EXECUTE'], 'TIRA_EVALUATION_SOFTWARE_ID': os.environ['TIRA_EVALUATION_SOFTWARE_ID']}
@@ -63,12 +62,7 @@ def extract_evaluation_commands(evaluator):
     if 'TIRA_EVALUATION_COMMAND_TO_EXECUTE' in os.environ and 'TIRA_EVALUATOR_TRANSACTION_ID' in os.environ and 'TIRA_EVALUATION_IMAGE_TO_EXECUTE' in os.environ:
         return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': os.environ['TIRA_EVALUATION_IMAGE_TO_EXECUTE'], 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': os.environ['TIRA_EVALUATION_COMMAND_TO_EXECUTE'], 'TIRA_EVALUATION_SOFTWARE_ID': os.environ['TIRA_EVALUATION_SOFTWARE_ID']}
 
-    eval_id = 'TODO-use-real-evaluator-id' #TODO evaluator['evaluatorId']
-    try:
-        evaluator = json.loads(evaluator['command'])
-        return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': evaluator['image'], 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': evaluator['command'], 'TIRA_EVALUATION_SOFTWARE_ID': eval_id}
-    except:
-        return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': 'ubuntu:16.04', 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': 'echo "No evaluation specified..."', 'TIRA_EVALUATION_SOFTWARE_ID': '-1'}
+    return {'TIRA_EVALUATION_IMAGE_TO_EXECUTE': 'ubuntu:16.04', 'TIRA_EVALUATION_COMMAND_TO_EXECUTE': 'echo "No evaluation specified..."', 'TIRA_EVALUATION_SOFTWARE_ID': '-1'}
 
 def copy_to_local(absolute_src, relative_target):
     if exists(absolute_src) and not exists(relative_target):
@@ -82,7 +76,6 @@ def copy_to_local(absolute_src, relative_target):
     json.dump({'keep': True}, open(relative_target + '/.keep', 'w'))
 
 def identify_environment_variables():
-    db = get_tira_db()
     eval_id = dt.now().strftime('%Y-%m-%d-%H-%M-%S')
     ret = set()
     for (k,v) in os.environ.items() :
@@ -94,7 +87,7 @@ def identify_environment_variables():
     copy_to_local(absolute_input_dataset, input_dataset)
     copy_to_local(str(run_output_dir()), 'local-copy-of-input-run')
     
-    evaluator = extract_evaluation_commands(db.get_evaluator(os.environ['TIRA_DATASET_ID'], os.environ['TIRA_TASK_ID']))
+    evaluator = extract_evaluation_commands()
     ret.add('TIRA_EVALUATION_INPUT_DIR=local-copy-of-input-run')
     ret.add('inputRun=local-copy-of-input-run')
     ret.add('TIRA_EVALUATION_OUTPUT_DIR=' + str(eval_dir(eval_id) / 'output'))

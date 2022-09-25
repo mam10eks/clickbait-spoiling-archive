@@ -1,0 +1,15 @@
+TIRA_IMAGE_TO_EXECUTE=registry.webis.de/code-research/tira/tira-user-bg40lecu/my-software:0.0.1-tira-docker-software-id-linear-headset
+TIRA_VM_ID=bg40lecu
+TIRA_COMMAND_TO_EXECUTE=ls
+TIRA_SOFTWARE_ID=docker-software-14
+TIRA_DATASET_ID=task-1-type-classification-validation-20220924-training
+TIRA_RUN_ID=2022-09-25-13-52-44
+TIRA_CPU_COUNT=2
+TIRA_MEMORY_IN_GIBIBYTE=10
+TIRA_DATASET_TYPE=training
+TIRA_TASK_ID=clickbait-spoiling
+TIRA_EVALUATOR_TRANSACTION_ID=1f5efb6e-e3ee-48ee-a278-37f7a22e3b8e
+TIRA_GIT_ID=eval---task-1-type-classification-validation-20220924-training---bg40lecu---2022-09-25-13-52-44---started-2022-09-25-13-52-44
+TIRA_EVALUATION_IMAGE_TO_EXECUTE=webis/pan-clickbait-spoiling-evaluator:0.0.10
+TIRA_EVALUATION_COMMAND_TO_EXECUTE=bash -c '/clickbait-spoiling-eval.py --task 1 --ground_truth_classes $inputDataset --input_run $inputRun --output_prototext ${outputDir}/evaluation.prototext'
+TIRA_EVALUATION_SOFTWARE_ID=task-1-type-classification-validation-20220924-training-evaluator

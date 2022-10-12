@@ -1,12 +1,23 @@
-IMAGE_VERSION=0.0.57
+VENV_NAME?=.venv
 
-build-tira-git-docker:
-	cp -r /home/maik/workspace/tira/host/src/tira_host src
-	docker build -t webis/tira-git:${IMAGE_VERSION} src
+.DEFAULT: help
+help:
+	@echo "make .venv"
+	@echo "       setup virtual environment"
+	@echo "make jupyterlab"
+	@echo "       start a jupyterlab server"
 
-publish-tira-git-docker:
-	docker push webis/tira-git:${IMAGE_VERSION}
+clean:
+	@rm -Rf ${VENV_NAME}
 
-dev-environment:
-	docker run --rm -ti -w=/app-in-progress -v ${PWD}/src:/app-in-progress webis/tira-git:${IMAGE_VERSION}
+# Requirements are in requirements.txt, so whenever requirements.txt is changed, re-run installation of dependencies.
+.venv:
+	@test -d $(VENV_NAME) || python3 -m venv $(VENV_NAME)
+	@sh -c ". $(VENV_NAME)/bin/activate && \
+		python3 -m pip install --upgrade pip && \
+		python3 -m pip install wheel && \
+		python3 -m pip install -r requirements.txt"
+
+jupyterlab: .venv
+	.venv/bin/jupyter-lab --ip 0.0.0.0
 

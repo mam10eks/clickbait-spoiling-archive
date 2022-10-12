@@ -1,0 +1,1 @@
+[[91mx[0m] The input is an directory that contains multiple json files. Please create only a single json file. Got []

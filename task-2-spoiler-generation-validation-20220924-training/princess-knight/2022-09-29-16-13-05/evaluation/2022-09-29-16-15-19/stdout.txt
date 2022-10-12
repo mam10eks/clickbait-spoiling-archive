@@ -1,0 +1,22 @@
+/usr/local/lib/python3.6/site-packages/nltk/translate/bleu_score.py:552: UserWarning: 
+The hypothesis contains 0 counts of 2-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+/usr/local/lib/python3.6/site-packages/nltk/translate/bleu_score.py:552: UserWarning: 
+The hypothesis contains 0 counts of 3-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+/usr/local/lib/python3.6/site-packages/nltk/translate/bleu_score.py:552: UserWarning: 
+The hypothesis contains 0 counts of 4-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+  [[92mo[0m] The file local-copy-of-input-run/run.jsonl is in JSONL format.
+  [[92mo[0m] The file training-datasets-truth/clickbait-spoiling/task-2-spoiler-generation-validation-20220924-training/validation.jsonl is in JSONL format.
+  [[92mo[0m] Spoiler generations have correct format. Found 800
+  [[92mo[0m] Spoiler generations have correct format. Found 800

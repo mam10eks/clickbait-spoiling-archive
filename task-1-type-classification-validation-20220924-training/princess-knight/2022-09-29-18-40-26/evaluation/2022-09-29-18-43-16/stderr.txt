@@ -1,0 +1,5 @@
+################################################################
+# Executed Command
+################################################################
+bash -c '/clickbait-spoiling-eval.py --task 1 --ground_truth_classes training-datasets-truth/clickbait-spoiling/task-1-type-classification-validation-20220924-training/ --input_run local-copy-of-input-run --output_prototext task-1-type-classification-validation-20220924-training/princess-knight/2022-09-29-18-40-26/output/../../2022-09-29-18-43-16/output/evaluation.prototext'
+################################################################

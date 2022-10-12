@@ -1,0 +1,3 @@
+[[92mo[0m] The file local-copy-of-input-run/run.jsonl is in JSONL format.
+  [[92mo[0m] The file training-datasets-truth/clickbait-spoiling/task-1-type-classification-validation-20220924-training/validation.jsonl is in JSONL format.
+  [[91mx[0m] Spoiler predictions do not have all required fields. Expected fields "uuid" and "spoilerType". Got: {'uuid': '6dc7ddef-4e8e-4a6b-9296-526377518071', 'spoiler': 'Five Nights at Freddys Sequel Delayed for Weird Reason'}

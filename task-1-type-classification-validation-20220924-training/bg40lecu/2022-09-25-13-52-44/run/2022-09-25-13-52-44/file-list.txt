@@ -1,0 +1,3 @@
+/mnt/ceph/tira/data/runs/task-1-type-classification-validation-20220924-training/bg40lecu/2022-09-25-13-52-44/output
+
+0 directories, 0 files

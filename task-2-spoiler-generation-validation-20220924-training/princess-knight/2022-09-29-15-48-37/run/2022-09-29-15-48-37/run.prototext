@@ -1,0 +1,8 @@
+softwareId: "docker-software-17"
+runId: "2022-09-29-15-48-37"
+inputDataset: "task-2-spoiler-generation-validation-20220924-training"
+inputRun: "none"
+downloadable: false
+deleted: false
+taskId: "clickbait-spoiling"
+accessToken: "ae452194-e9b1-4717-b312-a4c9fe851acc"

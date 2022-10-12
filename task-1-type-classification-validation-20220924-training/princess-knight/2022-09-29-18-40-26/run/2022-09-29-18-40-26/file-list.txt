@@ -1,0 +1,4 @@
+/mnt/ceph/tira/data/runs/task-1-type-classification-validation-20220924-training/princess-knight/2022-09-29-18-40-26/output
+└── [102K]  run.jsonl
+
+0 directories, 1 file

@@ -1,0 +1,9 @@
+Makefile
+README.md
+del-me-20220813-training
+src
+task-1-type-classification-validation-20220924-training
+task-2-spoiler-generation-validation-20220924-training
+task.env
+tira-git
+training-datasets

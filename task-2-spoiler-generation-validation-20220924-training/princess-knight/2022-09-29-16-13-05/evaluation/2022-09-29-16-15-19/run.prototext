@@ -1,0 +1,8 @@
+softwareId: "task-2-spoiler-generation-validation-20220924-training-evaluator"
+runId: "2022-09-29-16-15-19"
+inputDataset: "task-2-spoiler-generation-validation-20220924-training"
+inputRun: "2022-09-29-16-13-05"
+downloadable: false
+deleted: false
+taskId: "clickbait-spoiling"
+accessToken: "d375b569-3d5a-4c29-82bc-f54823c1d275"

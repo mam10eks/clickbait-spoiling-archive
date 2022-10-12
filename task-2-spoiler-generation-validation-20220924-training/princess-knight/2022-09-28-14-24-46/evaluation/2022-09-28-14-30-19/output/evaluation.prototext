@@ -1,0 +1,12 @@
+measure{
+  key: "result-size"
+  value: "800"
+}
+measure{
+  key: "bleu-score"
+  value: "0.021110111599912024"
+}
+measure{
+  key: "missing-predictions"
+  value: "0"
+}

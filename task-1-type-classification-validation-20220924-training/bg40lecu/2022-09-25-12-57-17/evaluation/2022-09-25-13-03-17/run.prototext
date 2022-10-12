@@ -1,0 +1,8 @@
+softwareId: "task-1-type-classification-validation-20220924-training-evaluator"
+runId: "2022-09-25-13-03-17"
+inputDataset: "task-1-type-classification-validation-20220924-training"
+inputRun: "2022-09-25-12-57-17"
+downloadable: false
+deleted: false
+taskId: "clickbait-spoiling"
+accessToken: "df12bbb7-2f0c-423c-85dd-9fb5582c4eb1"

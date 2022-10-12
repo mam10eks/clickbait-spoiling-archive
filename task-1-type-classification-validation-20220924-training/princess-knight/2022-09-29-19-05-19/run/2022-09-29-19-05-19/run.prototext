@@ -1,0 +1,8 @@
+softwareId: "docker-software-17"
+runId: "2022-09-29-19-05-19"
+inputDataset: "task-1-type-classification-validation-20220924-training"
+inputRun: "none"
+downloadable: false
+deleted: false
+taskId: "clickbait-spoiling"
+accessToken: "b9845637-39f7-4d58-a65a-88805346cd6e"

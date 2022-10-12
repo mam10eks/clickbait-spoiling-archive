@@ -1,0 +1,5 @@
+################################################################
+# Executed Command
+################################################################
+/naive-baseline-task-2.py --input training-datasets/clickbait-spoiling/task-2-spoiler-generation-validation-20220924-training//input.jsonl --output task-2-spoiler-generation-validation-20220924-training/princess-knight/2022-09-29-16-13-05/output/run.jsonl
+################################################################

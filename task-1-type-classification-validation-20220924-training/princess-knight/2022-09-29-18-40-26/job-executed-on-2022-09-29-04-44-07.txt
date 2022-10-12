@@ -1,0 +1,15 @@
+TIRA_IMAGE_TO_EXECUTE=registry.webis.de/code-research/tira/tira-user-princess-knight/naive-baseline-task2:0.0.1-tira-docker-software-id-genteel-upstream
+TIRA_VM_ID=princess-knight
+TIRA_COMMAND_TO_EXECUTE=/naive-baseline-task-2.py --input $inputDataset/input.jsonl --output $outputDir/run.jsonl
+TIRA_SOFTWARE_ID=docker-software-17
+TIRA_DATASET_ID=task-1-type-classification-validation-20220924-training
+TIRA_RUN_ID=2022-09-29-18-40-26
+TIRA_CPU_COUNT=2
+TIRA_MEMORY_IN_GIBIBYTE=10
+TIRA_DATASET_TYPE=training
+TIRA_TASK_ID=clickbait-spoiling
+TIRA_EVALUATOR_TRANSACTION_ID=29d9e4d5-8995-4ee6-bf1e-52a5290ae277
+TIRA_GIT_ID=eval---task-1-type-classification-validation-20220924-training---princess-knight---2022-09-29-18-40-26---started-2022-09-29-18-40-26
+TIRA_EVALUATION_IMAGE_TO_EXECUTE=webis/pan-clickbait-spoiling-evaluator:0.0.10
+TIRA_EVALUATION_COMMAND_TO_EXECUTE=bash -c '/clickbait-spoiling-eval.py --task 1 --ground_truth_classes $inputDataset --input_run $inputRun --output_prototext ${outputDir}/evaluation.prototext'
+TIRA_EVALUATION_SOFTWARE_ID=task-1-type-classification-validation-20220924-training-evaluator

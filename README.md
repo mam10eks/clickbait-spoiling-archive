@@ -1,10 +1,15 @@
 # Archive of the [Clickbait Challenge at SemEval 2023](https://pan.webis.de/semeval23/pan23-web/clickbait-challenge.html)
 
-This repository serves as archive of the shared [task on clickbait spoiling](https://pan.webis.de/semeval23/pan23-web/clickbait-challenge.html) that did run as part of [SemEval 2023](https://semeval.github.io/SemEval2023/).
+Clickbait posts link to web pages and advertise their content by arousing curiosity instead of providing informative summaries. Clickbait spoiling aims at generating short texts that satisfy the curiosity induced by a clickbait post. This repository serves as archive of the [shared task on clickbait spoiling](https://pan.webis.de/semeval23/pan23-web/clickbait-challenge.html) that did run as part of [SemEval 2023](https://semeval.github.io/SemEval2023/).
 
-The repository contains all software submissions (dockerized), datasets, and evaluators (dockerized) that can be easily applied to new/manipulated data to allow novel evaluations and experiments to maximize the impact of a shared task (in terms of reproducibility/reusability/replicability/follow-up studies, etc.).
+The following figure illustrates some example inputs and the expected output for clickbait spoiling:
 
-**This repository currently includes only the baselines as the shared task is currently running (to prevent side effects to participants). After completion of the shared task, all submitted approaches can be executed and evaluated (as they are all available in Docker images) as shown in the examples of this repository.***
+![twitter-clickbait-examples](https://user-images.githubusercontent.com/10050886/195431904-2c53a25d-2bbc-4e10-bd6a-a69871c3ce9c.png)
+
+The repository contains all datasets and (dockerized) software submissions and evaluators.
+Those software submissions and evaluators can be easily applied to new/manipulated data, allowing novel evaluations and experiments, thereby maximizing the impact of a shared task (in terms of reproducibility/reusability/replicability/follow-up studies, etc.).
+
+**This repository currently includes only the baselines as the shared task is currently running (to prevent side effects to participants). After completion of the shared task, all submitted approaches can be executed and evaluated (as they are all available in Docker images) as shown in the examples of this repository.**
 
 The notebook [Tutorial.ipynb](Tutorial.ipynb) shows different use cases: (1)  Re-evaluation of submitted approaches, and (2) execution of submitted approaches on new or manipulated data (e.g., for ablation studies or ensembles).
 
